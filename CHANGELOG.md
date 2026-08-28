@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.1](https://github.com/cooper-square-technologies/profound-rust-sdk/compare/v0.1.0...v0.1.1) (2026-08-28)
+
+
+### Chores
+
+* release 0.1.1 ([729d5f4](https://github.com/cooper-square-technologies/profound-rust-sdk/commit/729d5f4895f46b16e23f2fd2c86676fad5ca0ece))
+* release 0.1.1 ([7300c85](https://github.com/cooper-square-technologies/profound-rust-sdk/commit/7300c8531c187e82482f2a7996715fee0f5224b0))
+
 ## [0.1.0](https://github.com/cooper-square-technologies/profound-rust-sdk/compare/v0.0.1...v0.1.0) (2026-08-28)
 
 
