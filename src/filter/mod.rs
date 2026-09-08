@@ -2,6 +2,7 @@ mod table;
 
 pub use table::{ALL_FIELDS, Field, Layer, MAX_DEPTH, Op};
 
+use crate::models::FilterNode;
 use serde::ser::{Serialize, SerializeMap, Serializer};
 use thiserror::Error;
 
@@ -20,6 +21,8 @@ impl Serialize for Value {
     }
 }
 
+/// Build a filter with `Filter::...`, then convert it with `.into()` when assigning it to
+/// `VisibilityV2Query::filter`, whose type is `Option<FilterNode>`.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Filter {
     And(Vec<Filter>),
@@ -67,6 +70,8 @@ pub enum FilterError {
     TooDeep { depth: usize, max: usize },
     #[error("Cannot mix prompt-layer and entity-layer fields under \"{kind}\"")]
     MixedLayers { kind: &'static str },
+    #[error("\"{kind}\" requires at least one node")]
+    EmptyGroup { kind: &'static str },
     #[error("\"in\" and \"not_in\" require a non-empty list of values")]
     EmptyList,
     #[error("\"matches\" requires a regex pattern of at least 3 characters")]
@@ -132,14 +137,14 @@ impl Filter {
 
     pub fn and(nodes: Vec<Filter>) -> Result<Self, FilterError> {
         if nodes.is_empty() {
-            return Err(FilterError::EmptyList);
+            return Err(FilterError::EmptyGroup { kind: "and" });
         }
         Self::And(nodes).check_depth()
     }
 
     pub fn or(nodes: Vec<Filter>) -> Result<Self, FilterError> {
         if nodes.is_empty() {
-            return Err(FilterError::EmptyList);
+            return Err(FilterError::EmptyGroup { kind: "or" });
         }
         let filter = Self::Or(nodes).check_depth()?;
         filter.check_single_layer("or")?;
@@ -202,9 +207,36 @@ impl Filter {
     }
 }
 
+impl From<Filter> for FilterNode {
+    fn from(filter: Filter) -> Self {
+        match filter {
+            Filter::And(nodes) => Self {
+                and: Some(nodes.into_iter().map(Self::from).collect()),
+                ..Self::default()
+            },
+            Filter::Or(nodes) => Self {
+                or: Some(nodes.into_iter().map(Self::from).collect()),
+                ..Self::default()
+            },
+            Filter::Not(node) => Self {
+                not: Some(Box::new(Self::from(*node))),
+                ..Self::default()
+            },
+            Filter::Leaf { field, op, value } => Self {
+                field: Some(field.name().to_owned()),
+                op: Some(op.as_str().to_owned()),
+                value: value
+                    .map(|value| serde_json::to_value(value).expect("filter value serialization is infallible")),
+                ..Self::default()
+            },
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::{ALL_FIELDS, Field, Filter, FilterError, Layer, MAX_DEPTH, Op};
+    use crate::models::FilterNode;
 
     #[test]
     fn nested_tree_serializes_to_the_exact_json_tree() {
@@ -217,6 +249,10 @@ mod tests {
             Filter::not(Filter::equals(Field::Region, "United States").unwrap()).unwrap(),
         ])
         .unwrap();
+        assert_eq!(
+            serde_json::to_value(FilterNode::from(tree.clone())).unwrap(),
+            tree.to_value()
+        );
         assert_eq!(
             tree.to_value(),
             serde_json::json!({
@@ -277,6 +313,12 @@ mod tests {
             Filter::exists(Field::Tag).unwrap().to_value(),
             serde_json::json!({"field": "tag", "op": "exists"})
         );
+    }
+
+    #[test]
+    fn empty_groups_are_rejected() {
+        assert_eq!(Filter::and(Vec::new()), Err(FilterError::EmptyGroup { kind: "and" }));
+        assert_eq!(Filter::or(Vec::new()), Err(FilterError::EmptyGroup { kind: "or" }));
     }
 
     #[test]
