@@ -4,6 +4,7 @@
 
 pub mod client;
 pub mod error;
+pub mod filter;
 #[doc(hidden)]
 pub mod http;
 pub mod models;
