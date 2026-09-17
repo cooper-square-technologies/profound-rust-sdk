@@ -29,9 +29,17 @@ pub struct ProjectGenerationStatus {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub focus_prompt: Option<String>,
     pub status: ProjectGenerationStatusStatus,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::datetime::option::deserialize"
+    )]
     pub started_at: Option<chrono::DateTime<chrono::FixedOffset>>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::datetime::option::deserialize"
+    )]
     pub finished_at: Option<chrono::DateTime<chrono::FixedOffset>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub error: Option<String>,

@@ -22,6 +22,7 @@ pub struct KnowledgeBaseItem {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
     /// Creation timestamp.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub created_at: chrono::DateTime<chrono::FixedOffset>,
 }
 
@@ -47,6 +48,7 @@ pub struct KnowledgeBaseSearchResult {
     /// Document or chunk path.
     pub id: String,
     /// Relevance score.
+    #[serde(serialize_with = "crate::number::serialize")]
     pub score: f64,
     /// Result metadata, including folder path.
     pub metadata: serde_json::Value,

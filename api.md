@@ -2340,7 +2340,7 @@ let response = client
         "7c9e6679-7425-40de-944b-e07fc1f90ae7",
         SearchKnowledgeBaseRequest {
             query: "x".to_string(),
-            top_k: 0,
+            top_k: 1,
             return_full_page: None,
             filters: None,
         },

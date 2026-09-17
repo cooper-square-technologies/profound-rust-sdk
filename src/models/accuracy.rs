@@ -115,12 +115,23 @@ pub struct AccuracyBreakdownRow {
     pub group_ids: Option<std::collections::HashMap<String, String>>,
     #[serde(rename = "groupNames", default, skip_serializing_if = "Option::is_none")]
     pub group_names: Option<std::collections::HashMap<String, String>>,
+    #[serde(serialize_with = "crate::number::serialize")]
     pub share: f64,
-    #[serde(rename = "shareChange", default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        rename = "shareChange",
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub share_change: Option<f64>,
-    #[serde(rename = "responseAccuracy")]
+    #[serde(rename = "responseAccuracy", serialize_with = "crate::number::serialize")]
     pub response_accuracy: f64,
-    #[serde(rename = "accuracyChange", default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        rename = "accuracyChange",
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub accuracy_change: Option<f64>,
     #[serde(rename = "accurateCount", default, skip_serializing_if = "Option::is_none")]
     pub accurate_count: Option<i64>,
@@ -292,9 +303,14 @@ impl AccuracyOverviewQuery {
 pub struct AccuracyOverviewResponse {
     #[serde(rename = "trendByPeriod")]
     pub trend_by_period: Vec<AccuracyTrendPoint>,
-    #[serde(rename = "overallAccuracy")]
+    #[serde(rename = "overallAccuracy", serialize_with = "crate::number::serialize")]
     pub overall_accuracy: f64,
-    #[serde(rename = "accuracyChange", default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        rename = "accuracyChange",
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub accuracy_change: Option<f64>,
     #[serde(rename = "scoreBreakdown")]
     pub score_breakdown: Vec<AccuracyScoreBreakdown>,
@@ -325,10 +341,16 @@ pub struct AccuracyPagination {
 pub struct AccuracyScoreBreakdown {
     pub status: String,
     pub count: i64,
+    #[serde(serialize_with = "crate::number::serialize")]
     pub share: f64,
     #[serde(rename = "countChange", default, skip_serializing_if = "Option::is_none")]
     pub count_change: Option<i64>,
-    #[serde(rename = "shareChange", default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        rename = "shareChange",
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub share_change: Option<f64>,
 }
 
@@ -341,6 +363,7 @@ pub struct AccuracyThemeTrendPoint {
     pub date: String,
     pub total: i64,
     pub accurate: i64,
+    #[serde(serialize_with = "crate::number::serialize")]
     pub ratio: f64,
 }
 
@@ -373,6 +396,7 @@ pub struct AccuracyTrendPoint {
     pub accurate: i64,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub verified: Option<i64>,
+    #[serde(serialize_with = "crate::number::serialize")]
     pub ratio: f64,
     #[serde(rename = "prevPeriodData", default, skip_serializing_if = "Option::is_none")]
     pub prev_period_data: Option<Box<AccuracyTrendPoint>>,
@@ -478,9 +502,14 @@ pub struct ClaimBreakdownRow {
     pub response_count: i64,
     #[serde(rename = "totalResponseCount")]
     pub total_response_count: i64,
-    #[serde(rename = "responseShare")]
+    #[serde(rename = "responseShare", serialize_with = "crate::number::serialize")]
     pub response_share: f64,
-    #[serde(rename = "responseShareDelta", default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        rename = "responseShareDelta",
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub response_share_delta: Option<f64>,
     #[serde(rename = "prevResponseCount")]
     pub prev_response_count: i64,
@@ -502,11 +531,16 @@ pub struct ClaimCitationRow {
     #[serde(rename = "domainCategory")]
     pub domain_category: String,
     pub snippet: String,
-    #[serde(rename = "citationCount")]
+    #[serde(rename = "citationCount", serialize_with = "crate::number::serialize")]
     pub citation_count: f64,
-    #[serde(rename = "citationShare")]
+    #[serde(rename = "citationShare", serialize_with = "crate::number::serialize")]
     pub citation_share: f64,
-    #[serde(rename = "citationShareDelta", default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        rename = "citationShareDelta",
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub citation_share_delta: Option<f64>,
 }
 
@@ -612,9 +646,14 @@ pub struct ClaimPromptBreakdownRow {
     pub response_count: i64,
     #[serde(rename = "totalResponseCount")]
     pub total_response_count: i64,
-    #[serde(rename = "responseShare")]
+    #[serde(rename = "responseShare", serialize_with = "crate::number::serialize")]
     pub response_share: f64,
-    #[serde(rename = "responseShareDelta", default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        rename = "responseShareDelta",
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub response_share_delta: Option<f64>,
     #[serde(rename = "prevResponseCount")]
     pub prev_response_count: i64,
@@ -741,6 +780,7 @@ pub struct ClusterExampleRunsResponse {
 pub struct ClusterModelShare {
     #[serde(rename = "modelId")]
     pub model_id: String,
+    #[serde(serialize_with = "crate::number::serialize")]
     pub occurrence: f64,
 }
 
@@ -818,9 +858,14 @@ pub struct InaccuracyDriverRow {
     pub snippet: String,
     #[serde(rename = "snippetClaimId")]
     pub snippet_claim_id: String,
-    #[serde(rename = "claimOccurrence")]
+    #[serde(rename = "claimOccurrence", serialize_with = "crate::number::serialize")]
     pub claim_occurrence: f64,
-    #[serde(rename = "claimOccurrenceDelta", default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        rename = "claimOccurrenceDelta",
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub claim_occurrence_delta: Option<f64>,
     pub href: String,
     #[serde(rename = "citationCategory")]
@@ -928,9 +973,14 @@ pub struct InaccurateClusterRow {
     pub response_count: i64,
     #[serde(rename = "totalResponseCount")]
     pub total_response_count: i64,
-    #[serde(rename = "responseShare")]
+    #[serde(rename = "responseShare", serialize_with = "crate::number::serialize")]
     pub response_share: f64,
-    #[serde(rename = "responseShareDelta", default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        rename = "responseShareDelta",
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub response_share_delta: Option<f64>,
     #[serde(rename = "citationHostnames")]
     pub citation_hostnames: Vec<String>,
@@ -1048,9 +1098,14 @@ pub struct InaccurateThemeRow {
     pub response_count: i64,
     #[serde(rename = "totalResponseCount")]
     pub total_response_count: i64,
-    #[serde(rename = "responseShare")]
+    #[serde(rename = "responseShare", serialize_with = "crate::number::serialize")]
     pub response_share: f64,
-    #[serde(rename = "responseShareDelta", default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        rename = "responseShareDelta",
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub response_share_delta: Option<f64>,
 }
 
@@ -1150,9 +1205,14 @@ pub struct TopInaccurateClaimRow {
     pub cluster_id: String,
     #[serde(rename = "canonicalClaim")]
     pub canonical_claim: String,
-    #[serde(rename = "claimOccurrence")]
+    #[serde(rename = "claimOccurrence", serialize_with = "crate::number::serialize")]
     pub claim_occurrence: f64,
-    #[serde(rename = "claimOccurrenceDelta", default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        rename = "claimOccurrenceDelta",
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub claim_occurrence_delta: Option<f64>,
 }
 

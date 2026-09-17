@@ -61,13 +61,24 @@ pub struct ShoppingBrandRow {
     pub region: Option<DimensionRef>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub prompt: Option<DimensionRef>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub visibility_score: Option<f64>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub average_position: Option<f64>,
     /// Asset visibility rank (present on grouped rows).
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub visibility_rank: Option<i64>,
+    /// Additional properties not captured by the named fields.
+    #[serde(flatten)]
+    pub additional_properties: std::collections::HashMap<String, serde_json::Value>,
 }
 
 ///
@@ -100,6 +111,9 @@ pub struct ShoppingBrandsV2Info {
     pub assets: Option<ShoppingBrandsV2InfoAssets>,
     /// Metrics returned per row.
     pub metrics: Vec<String>,
+    /// Additional properties not captured by the named fields.
+    #[serde(flatten)]
+    pub additional_properties: std::collections::HashMap<String, serde_json::Value>,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -175,11 +189,19 @@ pub struct ShoppingBrandsV2Response {
 pub struct ShoppingMerchantRow {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub merchant_name: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub merchant_share: Option<f64>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub merchant_share_rank: Option<i64>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub merchant_visibility: Option<f64>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub merchant_visibility_rank: Option<i64>,
@@ -189,14 +211,25 @@ pub struct ShoppingMerchantRow {
     pub visibility_rank: Option<i64>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub brand_name: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub brand_share: Option<f64>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub product: Option<serde_json::Value>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub product_visibility: Option<f64>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub product_rank: Option<i64>,
+    /// Additional properties not captured by the named fields.
+    #[serde(flatten)]
+    pub additional_properties: std::collections::HashMap<String, serde_json::Value>,
 }
 
 ///
@@ -226,6 +259,9 @@ pub struct ShoppingMerchantsV2Info {
     pub view: String,
     /// Metrics returned per row.
     pub metrics: Vec<String>,
+    /// Additional properties not captured by the named fields.
+    #[serde(flatten)]
+    pub additional_properties: std::collections::HashMap<String, serde_json::Value>,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -301,21 +337,49 @@ pub struct ShoppingProductRow {
     pub topic: Option<DimensionRef>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub prompt: Option<DimensionRef>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub visibility_score: Option<f64>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub average_position: Option<f64>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub visibility_rank: Option<i64>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub position1_percentage: Option<f64>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub position2_percentage: Option<f64>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub position3_percentage: Option<f64>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub position_above3_percentage: Option<f64>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub product_rating: Option<f64>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub product_num_reviews: Option<i64>,
@@ -326,6 +390,9 @@ pub struct ShoppingProductRow {
     /// Per-product merchant offers `{name, price}` (only with `include_merchants`).
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub merchants: Option<Vec<serde_json::Value>>,
+    /// Additional properties not captured by the named fields.
+    #[serde(flatten)]
+    pub additional_properties: std::collections::HashMap<String, serde_json::Value>,
 }
 
 ///
@@ -355,6 +422,9 @@ pub struct ShoppingProductsV2Info {
     pub include_merchants: bool,
     /// Metrics returned per row.
     pub metrics: Vec<String>,
+    /// Additional properties not captured by the named fields.
+    #[serde(flatten)]
+    pub additional_properties: std::collections::HashMap<String, serde_json::Value>,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -446,8 +516,15 @@ pub struct ShoppingTriggerRateRow {
     pub total_runs: Option<i64>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub shopping_triggered_runs: Option<i64>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub trigger_rate_percentage: Option<f64>,
+    /// Additional properties not captured by the named fields.
+    #[serde(flatten)]
+    pub additional_properties: std::collections::HashMap<String, serde_json::Value>,
 }
 
 ///
@@ -475,6 +552,9 @@ pub struct ShoppingTriggerRateV2Info {
     pub filter: Option<serde_json::Value>,
     /// Metrics returned per row.
     pub metrics: Vec<String>,
+    /// Additional properties not captured by the named fields.
+    #[serde(flatten)]
+    pub additional_properties: std::collections::HashMap<String, serde_json::Value>,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]

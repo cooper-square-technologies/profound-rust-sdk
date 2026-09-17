@@ -41,8 +41,10 @@ pub struct StreamWebSearchResultsQuery {
     pub pagination: Option<Pagination>,
     pub category_id: String,
     /// Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub start_date: chrono::DateTime<chrono::FixedOffset>,
     /// End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub end_date: chrono::DateTime<chrono::FixedOffset>,
     /// List of filters to apply to the web search results report.
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -102,8 +104,10 @@ pub struct WebSearchResultsQuery {
     pub pagination: Option<Pagination>,
     pub category_id: String,
     /// Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub start_date: chrono::DateTime<chrono::FixedOffset>,
     /// End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub end_date: chrono::DateTime<chrono::FixedOffset>,
     /// List of filters to apply to the web search results report.
     #[serde(default, skip_serializing_if = "Option::is_none")]

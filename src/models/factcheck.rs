@@ -42,12 +42,19 @@ pub struct FactcheckScoreRow {
     pub theme: Option<DimensionRef>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub citation: Option<CitationScoreRef>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub accuracy: Option<f64>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub accurate: Option<i64>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub inaccurate: Option<i64>,
+    /// Additional properties not captured by the named fields.
+    #[serde(flatten)]
+    pub additional_properties: std::collections::HashMap<String, serde_json::Value>,
 }
 
 ///
@@ -75,6 +82,9 @@ pub struct FactcheckScoresInfo {
     pub filter: Option<serde_json::Value>,
     /// Dimensions the scores are sliced by (empty → headline).
     pub group_by: Vec<String>,
+    /// Additional properties not captured by the named fields.
+    #[serde(flatten)]
+    pub additional_properties: std::collections::HashMap<String, serde_json::Value>,
 }
 
 /// Accuracy scores. `group_by` picks the slice (one or two dimensions); empty → the headline score.

@@ -55,16 +55,32 @@ pub struct InsightRow {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub clicks: Option<i64>,
     /// Spend in the ad account's currency units.
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub spend: Option<f64>,
     /// Click-through rate.
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub ctr: Option<f64>,
     /// Cost per click.
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub cpc: Option<f64>,
     /// Cost per thousand impressions.
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub cpm: Option<f64>,
 }
 
