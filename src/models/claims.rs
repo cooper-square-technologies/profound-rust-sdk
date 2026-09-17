@@ -21,7 +21,11 @@ pub struct ClaimCitationSource {
     pub domain_category: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub snippet: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub citation_share: Option<f64>,
 }
 
@@ -52,7 +56,11 @@ pub struct ClaimModelOccurrence {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
     /// Only populated for entries in `models`; omitted from grouped-section `model`.
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub occurrence: Option<f64>,
 }
 
@@ -67,7 +75,11 @@ pub struct FactcheckClaim {
     pub cluster_id: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub claim: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub occurrence: Option<f64>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub theme: Option<String>,
@@ -79,6 +91,9 @@ pub struct FactcheckClaim {
     pub evidence: Option<Vec<ClaimEvidence>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub citation_sources: Option<Vec<ClaimCitationSource>>,
+    /// Additional properties not captured by the named fields.
+    #[serde(flatten)]
+    pub additional_properties: std::collections::HashMap<String, serde_json::Value>,
 }
 
 ///
@@ -109,6 +124,9 @@ pub struct FactcheckClaimsInfo {
     /// Per-claim detail fields requested.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub include: Option<Vec<String>>,
+    /// Additional properties not captured by the named fields.
+    #[serde(flatten)]
+    pub additional_properties: std::collections::HashMap<String, serde_json::Value>,
 }
 
 /// The inaccurate claims — flat + paginated, or `group_by` one dim to section them (all claims per section).
@@ -181,7 +199,11 @@ pub struct FactcheckClaimsRow {
     pub cluster_id: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub claim: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub occurrence: Option<f64>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reasoning: Option<String>,
@@ -206,7 +228,11 @@ pub struct FactcheckClaimsRow {
     /// Claim theme (string), or an `{id, name}` ref when sectioning by `theme`.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub theme: Option<FactcheckClaimsRowTheme>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub accuracy: Option<f64>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub accurate: Option<i64>,
@@ -216,6 +242,9 @@ pub struct FactcheckClaimsRow {
     pub total_claims: Option<i64>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub claims: Option<Vec<FactcheckClaim>>,
+    /// Additional properties not captured by the named fields.
+    #[serde(flatten)]
+    pub additional_properties: std::collections::HashMap<String, serde_json::Value>,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]

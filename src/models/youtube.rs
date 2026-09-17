@@ -39,7 +39,11 @@ pub struct YoutubeChannelRow {
     /// Distinct videos of this channel that were cited.
     pub videos: i64,
     /// Share of every YouTube citation in the window (attributed and unattributed alike), or the period when `interval` is set, regardless of `source_types`. An unnarrowed complete ranking sums to slightly less than 1 because unattributed citations cannot appear in channel rows; a narrowed ranking sums to its slice's share.
+    #[serde(serialize_with = "crate::number::serialize")]
     pub citation_share: f64,
+    /// Additional properties not captured by the named fields.
+    #[serde(flatten)]
+    pub additional_properties: std::collections::HashMap<String, serde_json::Value>,
 }
 
 /// Channel report metadata, including effective paging and grouping settings.
@@ -79,6 +83,9 @@ pub struct YoutubeChannelsInfo {
     pub interval: Option<YoutubeChannelsInfoInterval>,
     /// Echoed dimensions that define a row. Channel reports echo `["channel"]` when group_by is omitted.
     pub group_by: Vec<String>,
+    /// Additional properties not captured by the named fields.
+    #[serde(flatten)]
+    pub additional_properties: std::collections::HashMap<String, serde_json::Value>,
 }
 
 /// Channel and category rollups.
@@ -209,6 +216,9 @@ pub struct YoutubeSummaryInfo {
     pub category_id: String,
     /// All five YouTube source types; this endpoint has no source_types request field and cannot be narrowed.
     pub source_types: Vec<YoutubeSummaryInfoSourceType>,
+    /// Additional properties not captured by the named fields.
+    #[serde(flatten)]
+    pub additional_properties: std::collections::HashMap<String, serde_json::Value>,
 }
 
 /// One object describing the window.
@@ -290,7 +300,11 @@ pub struct YoutubeVideoRow {
     /// Citations attributed to this video.
     pub count: i64,
     /// Share of every YouTube citation in the window (attributed and unattributed alike), regardless of `source_types`. Shares sum to at most 1, reaching about 1 only with `attribution="all"` and no `source_types` filter; a narrowed ranking sums to its slice's share.
+    #[serde(serialize_with = "crate::number::serialize")]
     pub citation_share: f64,
+    /// Additional properties not captured by the named fields.
+    #[serde(flatten)]
+    pub additional_properties: std::collections::HashMap<String, serde_json::Value>,
 }
 
 /// Video report metadata, including effective paging and attribution settings.
@@ -328,6 +342,9 @@ pub struct YoutubeVideosInfo {
     pub limit: i64,
     /// Effective video attribution mode.
     pub attribution: YoutubeVideosInfoAttribution,
+    /// Additional properties not captured by the named fields.
+    #[serde(flatten)]
+    pub additional_properties: std::collections::HashMap<String, serde_json::Value>,
 }
 
 /// Cited videos, optionally narrowed to specific channels.

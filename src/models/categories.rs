@@ -68,6 +68,7 @@ pub struct CategoryAsset {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub alternate_domains: Option<Vec<String>>,
     pub is_owned: bool,
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub created_at: chrono::DateTime<chrono::FixedOffset>,
     pub logo_url: String,
 }
@@ -359,7 +360,9 @@ pub struct Prompt {
     pub platforms: Vec<NamedResource>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub personas: Option<Vec<NamedResource>>,
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub created_at: chrono::DateTime<chrono::FixedOffset>,
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub updated_at: chrono::DateTime<chrono::FixedOffset>,
 }
 

@@ -66,8 +66,10 @@ pub struct CreateDocumentResponse {
     /// General access scope. New documents are `invited_only`.
     pub visibility: CreateDocumentResponseVisibility,
     /// When the document was created.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub created_at: chrono::DateTime<chrono::FixedOffset>,
     /// When the document was last modified. Seeding the initial content counts, so a freshly created document is normally modified a moment after it was created.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub updated_at: chrono::DateTime<chrono::FixedOffset>,
     /// ID of the document's owner.
     pub owner_user_id: String,
@@ -106,8 +108,10 @@ pub struct Document {
     /// General access scope. New documents are `invited_only`.
     pub visibility: DocumentVisibility,
     /// When the document was created.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub created_at: chrono::DateTime<chrono::FixedOffset>,
     /// When the document was last modified. Seeding the initial content counts, so a freshly created document is normally modified a moment after it was created.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub updated_at: chrono::DateTime<chrono::FixedOffset>,
     /// ID of the document's owner.
     pub owner_user_id: String,
@@ -157,8 +161,10 @@ pub struct ReadDocumentResponse {
     /// General access scope. New documents are `invited_only`.
     pub visibility: ReadDocumentResponseVisibility,
     /// When the document was created.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub created_at: chrono::DateTime<chrono::FixedOffset>,
     /// When the document was last modified. Seeding the initial content counts, so a freshly created document is normally modified a moment after it was created.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub updated_at: chrono::DateTime<chrono::FixedOffset>,
     /// ID of the document's owner.
     pub owner_user_id: String,
@@ -234,8 +240,10 @@ pub struct ReplaceDocumentContentResponse {
     /// General access scope. New documents are `invited_only`.
     pub visibility: ReplaceDocumentContentResponseVisibility,
     /// When the document was created.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub created_at: chrono::DateTime<chrono::FixedOffset>,
     /// When the document was last modified. Seeding the initial content counts, so a freshly created document is normally modified a moment after it was created.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub updated_at: chrono::DateTime<chrono::FixedOffset>,
     /// ID of the document's owner.
     pub owner_user_id: String,

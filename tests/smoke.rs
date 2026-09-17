@@ -657,8 +657,8 @@ async fn smoke() {
                     end_date: "".to_string(),
                     include: Some(vec![AnswersV2QueryInclude::RunId]),
                     filter: None,
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -715,8 +715,8 @@ async fn smoke() {
                     end_date: "".to_string(),
                     include: Some(vec![AnswersV2QueryInclude::RunId]),
                     filter: None,
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -1393,8 +1393,8 @@ async fn smoke() {
                     interval: Some(CitationsV2QueryInterval::Day),
                     scope: Some(CitationsV2QueryScope::All),
                     filter: None,
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -1464,8 +1464,8 @@ async fn smoke() {
                     assets: None,
                     filter: None,
                     sort: Some(AppRoutesV2AnswerEngineInsightsReportsVisibilitySortSpec { field: None }),
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -1542,8 +1542,8 @@ async fn smoke() {
                     filter: None,
                     sort: Some(AppRoutesV2AnswerEngineInsightsReportsSentimentSortSpec { field: None, dir: None }),
                     include_cited_websites: Some(false),
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -1612,8 +1612,8 @@ async fn smoke() {
                         field: "".to_string(),
                         dir: None,
                     }),
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -1741,8 +1741,8 @@ async fn smoke() {
                     assets: None,
                     filter: None,
                     sort: Some(AppRoutesV2AnswerEngineInsightsReportsVisibilitySortSpec { field: None }),
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -1799,8 +1799,8 @@ async fn smoke() {
                     interval: Some(CitationsV2QueryInterval::Day),
                     scope: Some(CitationsV2QueryScope::All),
                     filter: None,
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -1863,8 +1863,8 @@ async fn smoke() {
                     filter: None,
                     sort: Some(AppRoutesV2AnswerEngineInsightsReportsSentimentSortSpec { field: None, dir: None }),
                     include_cited_websites: Some(false),
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -1925,8 +1925,8 @@ async fn smoke() {
                         field: "".to_string(),
                         dir: None,
                     }),
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -2122,8 +2122,8 @@ async fn smoke() {
                     scope: Some(ShoppingBrandsV2QueryScope::Owned),
                     assets: None,
                     filter: None,
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -2190,8 +2190,8 @@ async fn smoke() {
                     scope: Some(ShoppingBrandsV2QueryScope::Owned),
                     assets: None,
                     filter: None,
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -2261,8 +2261,8 @@ async fn smoke() {
                     target_product: Some("x".to_string()),
                     competitor_limit: Some(5),
                     filter: None,
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -2334,8 +2334,8 @@ async fn smoke() {
                     target_product: Some("x".to_string()),
                     competitor_limit: Some(5),
                     filter: None,
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -2399,8 +2399,8 @@ async fn smoke() {
                     metrics: Some(vec![ShoppingMerchantsV2QueryMetric::MerchantShare]),
                     interval: Some(ShoppingMerchantsV2QueryInterval::Day),
                     filter: None,
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -2466,8 +2466,8 @@ async fn smoke() {
                     metrics: Some(vec![ShoppingMerchantsV2QueryMetric::MerchantShare]),
                     interval: Some(ShoppingMerchantsV2QueryInterval::Day),
                     filter: None,
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -2531,8 +2531,8 @@ async fn smoke() {
                     metrics: Some(vec![ShoppingTriggerRateV2QueryMetric::TotalRuns]),
                     interval: Some(ShoppingTriggerRateV2QueryInterval::Day),
                     filter: None,
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -2598,8 +2598,8 @@ async fn smoke() {
                     metrics: Some(vec![ShoppingTriggerRateV2QueryMetric::TotalRuns]),
                     interval: Some(ShoppingTriggerRateV2QueryInterval::Day),
                     filter: None,
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -3479,8 +3479,8 @@ async fn smoke() {
                     end_date: "".to_string(),
                     group_by: Some(vec![FactcheckScoresQueryGroupBy::Date]),
                     filter: None,
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -3539,8 +3539,8 @@ async fn smoke() {
                     end_date: "".to_string(),
                     group_by: Some(vec![FactcheckScoresQueryGroupBy::Date]),
                     filter: None,
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -3601,8 +3601,8 @@ async fn smoke() {
                     group_by: Some(vec![FactcheckClaimsQueryGroupBy::Model]),
                     filter: None,
                     include: Some(vec![FactcheckClaimsQueryInclude::Theme]),
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -3665,8 +3665,8 @@ async fn smoke() {
                     group_by: Some(vec![FactcheckClaimsQueryGroupBy::Model]),
                     filter: None,
                     include: Some(vec![FactcheckClaimsQueryInclude::Theme]),
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -3728,7 +3728,7 @@ async fn smoke() {
                     start_date: "".to_string(),
                     end_date: "".to_string(),
                     filter: None,
-                    limit: Some(0),
+                    limit: Some(1),
                     cursor: Some("".to_string()),
                     source_types: Some(vec![YoutubeChannelsQuerySourceType::Video]),
                     group_by: Some(vec![YoutubeChannelsQueryGroupBy::Channel]),
@@ -3789,7 +3789,7 @@ async fn smoke() {
                     start_date: "".to_string(),
                     end_date: "".to_string(),
                     filter: None,
-                    limit: Some(0),
+                    limit: Some(1),
                     cursor: Some("".to_string()),
                     source_types: Some(vec![YoutubeVideosQuerySourceType::Video]),
                     attribution: Some(YoutubeVideosQueryAttribution::Attributed),
@@ -4200,7 +4200,7 @@ async fn smoke() {
                     "7c9e6679-7425-40de-944b-e07fc1f90ae7",
                     SearchKnowledgeBaseRequest {
                         query: "x".to_string(),
-                        top_k: 0,
+                        top_k: 1,
                         return_full_page: None,
                         filters: None,
                     },
@@ -4227,7 +4227,7 @@ async fn smoke() {
                     "7c9e6679-7425-40de-944b-e07fc1f90ae7",
                     SearchKnowledgeBaseRequest {
                         query: "x".to_string(),
-                        top_k: 0,
+                        top_k: 1,
                         return_full_page: Some(false),
                         filters: Some(SearchKnowledgeBaseFilters {
                             tags: None,
@@ -4580,7 +4580,7 @@ async fn smoke() {
                         id: "x".to_string(),
                         name: "x".to_string(),
                         mime_type: "x".to_string(),
-                        size_bytes: 0,
+                        size_bytes: 1,
                         data_base64: "x".to_string(),
                     }]),
                     generation_context: Some(ProjectGenerationContext {
@@ -4822,7 +4822,7 @@ async fn smoke() {
                         brief: Some("x".to_string()),
                         r#type: Some("x".to_string()),
                         topic: Some("x".to_string()),
-                        impact: Some(0),
+                        impact: Some(1),
                         reference_url: Some("x".to_string()),
                         reference_label: Some("x".to_string()),
                         position: Some(0),
@@ -4912,7 +4912,7 @@ async fn smoke() {
                         brief: Some("x".to_string()),
                         r#type: Some("x".to_string()),
                         topic: Some("x".to_string()),
-                        impact: Some(0),
+                        impact: Some(1),
                         reference_url: Some("x".to_string()),
                         reference_label: Some("x".to_string()),
                     },

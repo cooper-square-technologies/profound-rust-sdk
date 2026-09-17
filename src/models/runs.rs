@@ -19,7 +19,11 @@ pub struct AcceptedAgentRun {
     /// Initial status of the accepted run.
     pub status: AgentRunStatus,
     /// When the run started, if execution began immediately.
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::datetime::option::deserialize"
+    )]
     pub started_at: Option<chrono::DateTime<chrono::FixedOffset>>,
 }
 
@@ -37,10 +41,18 @@ pub struct AgentRun {
     /// Current status of the run.
     pub status: AgentRunStatus,
     /// When the run started, if it has started.
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::datetime::option::deserialize"
+    )]
     pub started_at: Option<chrono::DateTime<chrono::FixedOffset>>,
     /// When the run finished, if it has completed.
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::datetime::option::deserialize"
+    )]
     pub finished_at: Option<chrono::DateTime<chrono::FixedOffset>>,
     /// Error details, when the run fails and error information is available.
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -137,10 +149,18 @@ pub struct AgentRunStep {
     /// Terminal status of this node execution.
     pub status: String,
     /// Wall-clock seconds the node took, if recorded.
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub elapsed_time: Option<f64>,
     /// When the node finished, if it has.
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::datetime::option::deserialize"
+    )]
     pub finished_at: Option<chrono::DateTime<chrono::FixedOffset>>,
     /// Failure detail for this node, when it failed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
