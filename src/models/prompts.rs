@@ -16,6 +16,7 @@ pub struct AnswerRow {
     pub run_id: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub date: Option<String>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub model: Option<DimensionRef>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -385,6 +386,7 @@ pub struct FilterNode {
     pub and: Option<Vec<FilterNode>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub or: Option<Vec<FilterNode>>,
+    /// A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub not: Option<Box<FilterNode>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]

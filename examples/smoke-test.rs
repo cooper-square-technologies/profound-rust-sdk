@@ -480,7 +480,7 @@ async fn main() {
                 .limit(10000)
                 .cursor("example")
                 .order_by(PromptOrderBy::CreatedAt)
-                .order_dir(OrderByDirection::Asc)
+                .order_dir(OrderByDirection::Desc)
                 .analysis_type(vec![AnalysisType::Visibility])
                 .prompt_type(vec![PromptType::Visibility])
                 .status(vec!["active".to_string()])

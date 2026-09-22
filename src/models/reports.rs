@@ -208,14 +208,19 @@ pub struct CitationRow {
     pub rank: Option<i64>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub date: Option<String>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub model: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub topic: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub region: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub persona: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub prompt: Option<DimensionRef>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -612,6 +617,7 @@ pub struct QueryFanoutsV2Query {
     pub metrics: Option<Vec<QueryFanoutsV2QueryMetric>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub interval: Option<QueryFanoutsV2QueryInterval>,
+    /// A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub filter: Option<FilterNode>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -969,24 +975,34 @@ impl SentimentQuery {
 pub struct SentimentRow {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub date: Option<String>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub model: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub topic: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub region: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub prompt: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub persona: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tag: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub theme: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub claim: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub run: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub competitor: Option<DimensionRef>,
     #[serde(
@@ -1143,6 +1159,7 @@ pub struct SentimentV2Query {
     pub metrics: Option<Vec<SentimentV2QueryMetric>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub interval: Option<SentimentV2QueryInterval>,
+    /// A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub filter: Option<FilterNode>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -1435,6 +1452,7 @@ pub struct StreamCitationsQuery {
     ///             
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub order_by: Option<std::collections::HashMap<String, StreamCitationsQueryOrderBy>>,
+    /// Offset-based pagination parameters.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub pagination: Option<Pagination>,
     pub category_id: String,
@@ -1494,6 +1512,7 @@ pub struct StreamSentimentQuery {
     ///         
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub order_by: Option<std::collections::HashMap<String, StreamSentimentQueryOrderBy>>,
+    /// Offset-based pagination parameters.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub pagination: Option<Pagination>,
     pub category_id: String,
@@ -1553,6 +1572,7 @@ pub struct StreamVisibilityQuery {
     ///         
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub order_by: Option<std::collections::HashMap<String, StreamVisibilityQueryOrderBy>>,
+    /// Offset-based pagination parameters.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub pagination: Option<Pagination>,
     pub category_id: String,
@@ -1702,14 +1722,19 @@ pub struct VisibilityRow {
     pub rank: Option<i64>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub date: Option<String>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub model: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub topic: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub region: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub prompt: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub persona: Option<DimensionRef>,
     #[serde(
@@ -1786,6 +1811,7 @@ pub struct VisibilityV2Query {
     /// A name (`is`), a list (`in`), or {op,value} with op `is`/`in`/`not_in`.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub assets: Option<VisibilityV2QueryAssets>,
+    /// A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub filter: Option<FilterNode>,
     #[serde(default, skip_serializing_if = "Option::is_none")]

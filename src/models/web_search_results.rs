@@ -37,6 +37,7 @@ pub struct StreamWebSearchResultsQuery {
     ///             
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub order_by: Option<std::collections::HashMap<String, StreamWebSearchResultsQueryOrderBy>>,
+    /// Offset-based pagination parameters.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub pagination: Option<Pagination>,
     pub category_id: String,
