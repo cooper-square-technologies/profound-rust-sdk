@@ -143,6 +143,11 @@ Complete reference of every operation, grouped by resource. See [the README](./R
   - [`Ads OpenaiAds`](#ads-openaiads)
     - [`Ads OpenaiAds AdAccount`](#ads-openaiads-adaccount)
       - [Get Account Insights](#get-account-insights)
+- [`PromptVolumes`](#promptvolumes)
+  - [`PromptVolumes Volume`](#promptvolumes-volume)
+    - [Get On The Fly Volume](#get-on-the-fly-volume)
+  - [`PromptVolumes Intents`](#promptvolumes-intents)
+    - [Get On The Fly Intent Shares](#get-on-the-fly-intent-shares)
 
 ## Setup
 
@@ -3025,6 +3030,74 @@ let response = client
     .openai_ads()
     .ad_account()
     .retrieve_insights()
+    .send()
+    .await?;
+```
+
+## `PromptVolumes`
+
+### `PromptVolumes Volume`
+
+#### Get On The Fly Volume
+
+Weekly and monthly volume projections for one keyword.
+
+Each organization can look up 1,000 distinct normalized keywords per UTC
+day. Repeats consume no additional allowance. New keywords over the cap
+return 429 with X-KeywordQuota-* and Retry-After headers. Quota admission
+requires Redis (503 when unavailable); empty results and query failures
+retain the reservation. Slices with at most two users are omitted.
+
+| Direction | Type |
+| --- | --- |
+| Request | [`OtfVolumeRequest`](./src/models/volume.rs) |
+| Response | [`OtfVolumeResponse`](./src/models/volume.rs) |
+
+```rust
+let response = client
+    .prompt_volumes()
+    .volume()
+    .on_the_fly(OtfVolumeRequest {
+        keyword: "".to_string(),
+        matching_type: OtfVolumeRequestMatchingType::ExactMatch,
+        start_date: chrono::Utc::now().date_naive(),
+        end_date: chrono::Utc::now().date_naive(),
+        regions: None,
+        platforms: None,
+        organization_id: None,
+    })
+    .send()
+    .await?;
+```
+
+### `PromptVolumes Intents`
+
+#### Get On The Fly Intent Shares
+
+Intent shares for one keyword across the requested cohort weeks.
+
+Shares are fractions from 0 to 1 over classified matching conversations.
+Cohorts with at most two matching users are omitted for privacy. This
+endpoint shares the volume endpoint's burst limit but consumes no daily
+keyword quota.
+
+| Direction | Type |
+| --- | --- |
+| Request | [`OtfIntentSharesQuery`](./src/models/intents.rs) |
+| Response | [`OtfIntentSharesResponse`](./src/models/intents.rs) |
+
+```rust
+let response = client
+    .prompt_volumes()
+    .intents()
+    .on_the_fly(OtfIntentSharesQuery {
+        keyword: "".to_string(),
+        matching_type: OtfIntentSharesQueryMatchingType::ExactMatch,
+        start_date: chrono::Utc::now().date_naive(),
+        end_date: chrono::Utc::now().date_naive(),
+        regions: None,
+        platforms: None,
+    })
     .send()
     .await?;
 ```

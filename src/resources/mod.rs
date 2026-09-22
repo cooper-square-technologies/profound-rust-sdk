@@ -13,6 +13,7 @@ pub mod factcheck;
 pub mod folders;
 pub mod generations;
 pub mod integrations;
+pub mod intents;
 pub mod knowledge_bases;
 pub mod knowledge_bases_documents;
 pub mod node_types;
@@ -20,12 +21,14 @@ pub mod openai_ads;
 pub mod optimization;
 pub mod organizations;
 pub mod projects;
+pub mod prompt_volumes;
 pub mod prompts;
 pub mod reports;
 pub mod runs;
 pub mod shopping;
 pub mod social;
 pub mod tasks;
+pub mod volume;
 pub mod web_search_results;
 pub mod youtube;
 
@@ -68,5 +71,9 @@ impl crate::client::ProfoundClient {
 
     pub fn ads(&self) -> crate::resources::ads::AdsResource {
         crate::resources::ads::AdsResource::new(self.clone())
+    }
+
+    pub fn prompt_volumes(&self) -> crate::resources::prompt_volumes::PromptVolumesResource {
+        crate::resources::prompt_volumes::PromptVolumesResource::new(self.clone())
     }
 }
