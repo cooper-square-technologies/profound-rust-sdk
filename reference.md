@@ -1010,6 +1010,7 @@ Get Account Insights
 - `AgentDetail`
 - `AgentGraph`
 - `AgentRun`
+- `AgentRunOutputDetail`
 - `AgentRunStatus`
 - `AgentRunStep`
 - `AgentSchema`
