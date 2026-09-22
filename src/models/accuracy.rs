@@ -168,6 +168,13 @@ pub struct AccuracyCitationAnalysisResponse {
     pub page_title: String,
     #[serde(rename = "markdownContent")]
     pub markdown_content: String,
+    /// Whether the page preview was shortened.
+    #[serde(
+        rename = "markdownContentTruncated",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub markdown_content_truncated: Option<bool>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub claims: Option<Vec<AccuracyCitationClaim>>,
 }

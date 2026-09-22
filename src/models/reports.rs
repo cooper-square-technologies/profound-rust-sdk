@@ -889,6 +889,12 @@ pub struct SentimentMetrics {
         serialize_with = "crate::number::option::serialize"
     )]
     pub occurrence: Option<f64>,
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
+    pub citation_share: Option<f64>,
     /// Additional properties not captured by the named fields.
     #[serde(flatten)]
     pub additional_properties: std::collections::HashMap<String, serde_json::Value>,
@@ -1005,6 +1011,8 @@ pub struct SentimentRow {
     /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub competitor: Option<DimensionRef>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub page: Option<String>,
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -1023,6 +1031,12 @@ pub struct SentimentRow {
         serialize_with = "crate::number::option::serialize"
     )]
     pub occurrence: Option<f64>,
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
+    pub citation_share: Option<f64>,
     /// Comparison-window metrics (when requested).
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub previous: Option<SentimentMetrics>,
@@ -1154,6 +1168,8 @@ pub struct SentimentV2Query {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub comparison_end_date: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub source: Option<SentimentV2QuerySource>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
     pub group_by: Option<Vec<SentimentV2QueryGroupBy>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub metrics: Option<Vec<SentimentV2QueryMetric>>,
@@ -1195,6 +1211,7 @@ impl SentimentV2Query {
             end_date: end_date.into(),
             comparison_start_date: None,
             comparison_end_date: None,
+            source: None,
             group_by: None,
             metrics: None,
             interval: None,
@@ -2269,6 +2286,8 @@ pub enum BotProviderFilterValueVariant1 {
     Commoncrawl,
     #[serde(rename = "openclaw")]
     Openclaw,
+    #[serde(rename = "exa")]
+    Exa,
     /// A value not known to this version of the SDK, preserved verbatim.
     #[serde(untagged)]
     Unknown(String),
@@ -2302,6 +2321,7 @@ impl BotProviderFilterValueVariant1 {
             Self::Yahoo => "yahoo",
             Self::Commoncrawl => "commoncrawl",
             Self::Openclaw => "openclaw",
+            Self::Exa => "exa",
             Self::Unknown(value) => value,
         }
     }
@@ -2340,6 +2360,7 @@ impl From<&str> for BotProviderFilterValueVariant1 {
             "yahoo" => Self::Yahoo,
             "commoncrawl" => Self::Commoncrawl,
             "openclaw" => Self::Openclaw,
+            "exa" => Self::Exa,
             other => Self::Unknown(other.to_owned()),
         }
     }
@@ -2400,6 +2421,8 @@ pub enum BotProviderFilterValueVariant2 {
     Commoncrawl,
     #[serde(rename = "openclaw")]
     Openclaw,
+    #[serde(rename = "exa")]
+    Exa,
     /// A value not known to this version of the SDK, preserved verbatim.
     #[serde(untagged)]
     Unknown(String),
@@ -2433,6 +2456,7 @@ impl BotProviderFilterValueVariant2 {
             Self::Yahoo => "yahoo",
             Self::Commoncrawl => "commoncrawl",
             Self::Openclaw => "openclaw",
+            Self::Exa => "exa",
             Self::Unknown(value) => value,
         }
     }
@@ -2471,6 +2495,7 @@ impl From<&str> for BotProviderFilterValueVariant2 {
             "yahoo" => Self::Yahoo,
             "commoncrawl" => Self::Commoncrawl,
             "openclaw" => Self::Openclaw,
+            "exa" => Self::Exa,
             other => Self::Unknown(other.to_owned()),
         }
     }
@@ -6055,6 +6080,49 @@ pub enum SentimentV2PromptIdFilterValue {
 /// adds the real variant.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[non_exhaustive]
+pub enum SentimentV2QuerySource {
+    #[serde(rename = "response")]
+    Response,
+    #[serde(rename = "citation")]
+    Citation,
+    /// A value not known to this version of the SDK, preserved verbatim.
+    #[serde(untagged)]
+    Unknown(String),
+}
+
+impl SentimentV2QuerySource {
+    /// The wire value this variant serializes to.
+    pub fn as_str(&self) -> &str {
+        match self {
+            Self::Response => "response",
+            Self::Citation => "citation",
+            Self::Unknown(value) => value,
+        }
+    }
+}
+
+impl std::fmt::Display for SentimentV2QuerySource {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.write_str(self.as_str())
+    }
+}
+
+impl From<&str> for SentimentV2QuerySource {
+    fn from(value: &str) -> Self {
+        match value {
+            "response" => Self::Response,
+            "citation" => Self::Citation,
+            other => Self::Unknown(other.to_owned()),
+        }
+    }
+}
+
+/// Match on `as_str()` (or build one with `From<&str>`) when you need a value
+/// this SDK version does not know. Matching `Unknown(_)` directly is an
+/// anti-pattern: that arm silently stops matching once a future SDK release
+/// adds the real variant.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[non_exhaustive]
 pub enum SentimentV2QueryGroupBy {
     #[serde(rename = "date")]
     Date,
@@ -6141,6 +6209,8 @@ pub enum SentimentV2QueryMetric {
     NegativeSentiment,
     #[serde(rename = "occurrence")]
     Occurrence,
+    #[serde(rename = "citation_share")]
+    CitationShare,
     /// A value not known to this version of the SDK, preserved verbatim.
     #[serde(untagged)]
     Unknown(String),
@@ -6153,6 +6223,7 @@ impl SentimentV2QueryMetric {
             Self::PositiveSentiment => "positive_sentiment",
             Self::NegativeSentiment => "negative_sentiment",
             Self::Occurrence => "occurrence",
+            Self::CitationShare => "citation_share",
             Self::Unknown(value) => value,
         }
     }
@@ -6170,6 +6241,7 @@ impl From<&str> for SentimentV2QueryMetric {
             "positive_sentiment" => Self::PositiveSentiment,
             "negative_sentiment" => Self::NegativeSentiment,
             "occurrence" => Self::Occurrence,
+            "citation_share" => Self::CitationShare,
             other => Self::Unknown(other.to_owned()),
         }
     }
@@ -8866,6 +8938,8 @@ pub enum AppRoutesV2AnswerEngineInsightsReportsSentimentSortSpecField {
     PositiveSentiment,
     #[serde(rename = "negative_sentiment")]
     NegativeSentiment,
+    #[serde(rename = "citation_share")]
+    CitationShare,
     /// A value not known to this version of the SDK, preserved verbatim.
     #[serde(untagged)]
     Unknown(String),
@@ -8878,6 +8952,7 @@ impl AppRoutesV2AnswerEngineInsightsReportsSentimentSortSpecField {
             Self::Occurrence => "occurrence",
             Self::PositiveSentiment => "positive_sentiment",
             Self::NegativeSentiment => "negative_sentiment",
+            Self::CitationShare => "citation_share",
             Self::Unknown(value) => value,
         }
     }
@@ -8895,6 +8970,7 @@ impl From<&str> for AppRoutesV2AnswerEngineInsightsReportsSentimentSortSpecField
             "occurrence" => Self::Occurrence,
             "positive_sentiment" => Self::PositiveSentiment,
             "negative_sentiment" => Self::NegativeSentiment,
+            "citation_share" => Self::CitationShare,
             other => Self::Unknown(other.to_owned()),
         }
     }
