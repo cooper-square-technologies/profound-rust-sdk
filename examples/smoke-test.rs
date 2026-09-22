@@ -7624,6 +7624,156 @@ async fn main() {
             error,
         });
     }
+    if selected(&filter, "onTheFly", "/v2/prompt-volumes/volume/on-the-fly") {
+        let started = std::time::Instant::now();
+        let result: Result<(), Error> = async {
+            let _ = client
+                .prompt_volumes()
+                .volume()
+                .on_the_fly(OtfVolumeRequest {
+                    keyword: "".to_string(),
+                    matching_type: OtfVolumeRequestMatchingType::ExactMatch,
+                    start_date: chrono::Utc::now().date_naive(),
+                    end_date: chrono::Utc::now().date_naive(),
+                    regions: None,
+                    platforms: None,
+                    organization_id: None,
+                })
+                .send()
+                .await?;
+            Ok(())
+        }
+        .await;
+        let duration_ms = started.elapsed().as_millis() as i64;
+        let (status, error) = match result {
+            Ok(()) => ("passed", String::new()),
+            Err(error) if is_smoke_failure(&error) => ("failed", format!("{error}")),
+            // A response came back (API error or decode mismatch): the request
+            // reached the server, which is what this smoke verifies.
+            Err(_) => ("passed", String::new()),
+        };
+        results.push(SmokeResult {
+            operation: "onTheFly".to_string(),
+            method: "POST".to_string(),
+            path: "/v2/prompt-volumes/volume/on-the-fly".to_string(),
+            label: "required params".to_string(),
+            status: status.to_string(),
+            duration_ms,
+            error,
+        });
+    }
+    if selected(&filter, "onTheFly", "/v2/prompt-volumes/volume/on-the-fly") {
+        let started = std::time::Instant::now();
+        let result: Result<(), Error> = async {
+            let _ = client
+                .prompt_volumes()
+                .volume()
+                .on_the_fly(OtfVolumeRequest {
+                    keyword: "".to_string(),
+                    matching_type: OtfVolumeRequestMatchingType::ExactMatch,
+                    start_date: chrono::Utc::now().date_naive(),
+                    end_date: chrono::Utc::now().date_naive(),
+                    regions: Some(vec!["".to_string()]),
+                    platforms: Some(vec!["".to_string()]),
+                    organization_id: Some("7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string()),
+                })
+                .send()
+                .await?;
+            Ok(())
+        }
+        .await;
+        let duration_ms = started.elapsed().as_millis() as i64;
+        let (status, error) = match result {
+            Ok(()) => ("passed", String::new()),
+            Err(error) if is_smoke_failure(&error) => ("failed", format!("{error}")),
+            // A response came back (API error or decode mismatch): the request
+            // reached the server, which is what this smoke verifies.
+            Err(_) => ("passed", String::new()),
+        };
+        results.push(SmokeResult {
+            operation: "onTheFly".to_string(),
+            method: "POST".to_string(),
+            path: "/v2/prompt-volumes/volume/on-the-fly".to_string(),
+            label: "all params".to_string(),
+            status: status.to_string(),
+            duration_ms,
+            error,
+        });
+    }
+    if selected(&filter, "onTheFly", "/v2/prompt-volumes/intents/on-the-fly") {
+        let started = std::time::Instant::now();
+        let result: Result<(), Error> = async {
+            let _ = client
+                .prompt_volumes()
+                .intents()
+                .on_the_fly(OtfIntentSharesQuery {
+                    keyword: "".to_string(),
+                    matching_type: OtfIntentSharesQueryMatchingType::ExactMatch,
+                    start_date: chrono::Utc::now().date_naive(),
+                    end_date: chrono::Utc::now().date_naive(),
+                    regions: None,
+                    platforms: None,
+                })
+                .send()
+                .await?;
+            Ok(())
+        }
+        .await;
+        let duration_ms = started.elapsed().as_millis() as i64;
+        let (status, error) = match result {
+            Ok(()) => ("passed", String::new()),
+            Err(error) if is_smoke_failure(&error) => ("failed", format!("{error}")),
+            // A response came back (API error or decode mismatch): the request
+            // reached the server, which is what this smoke verifies.
+            Err(_) => ("passed", String::new()),
+        };
+        results.push(SmokeResult {
+            operation: "onTheFly".to_string(),
+            method: "POST".to_string(),
+            path: "/v2/prompt-volumes/intents/on-the-fly".to_string(),
+            label: "required params".to_string(),
+            status: status.to_string(),
+            duration_ms,
+            error,
+        });
+    }
+    if selected(&filter, "onTheFly", "/v2/prompt-volumes/intents/on-the-fly") {
+        let started = std::time::Instant::now();
+        let result: Result<(), Error> = async {
+            let _ = client
+                .prompt_volumes()
+                .intents()
+                .on_the_fly(OtfIntentSharesQuery {
+                    keyword: "".to_string(),
+                    matching_type: OtfIntentSharesQueryMatchingType::ExactMatch,
+                    start_date: chrono::Utc::now().date_naive(),
+                    end_date: chrono::Utc::now().date_naive(),
+                    regions: Some(vec!["".to_string()]),
+                    platforms: Some(vec!["".to_string()]),
+                })
+                .send()
+                .await?;
+            Ok(())
+        }
+        .await;
+        let duration_ms = started.elapsed().as_millis() as i64;
+        let (status, error) = match result {
+            Ok(()) => ("passed", String::new()),
+            Err(error) if is_smoke_failure(&error) => ("failed", format!("{error}")),
+            // A response came back (API error or decode mismatch): the request
+            // reached the server, which is what this smoke verifies.
+            Err(_) => ("passed", String::new()),
+        };
+        results.push(SmokeResult {
+            operation: "onTheFly".to_string(),
+            method: "POST".to_string(),
+            path: "/v2/prompt-volumes/intents/on-the-fly".to_string(),
+            label: "all params".to_string(),
+            status: status.to_string(),
+            duration_ms,
+            error,
+        });
+    }
     if selected(&filter, "getBotsReportV2", "/v2/reports/bots") {
         results.push(SmokeResult {
             operation: "getBotsReportV2".to_string(),

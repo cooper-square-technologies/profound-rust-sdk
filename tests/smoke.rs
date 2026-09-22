@@ -5316,6 +5316,116 @@ async fn smoke() {
             }
         }
     }
+    {
+        let result: Result<(), Error> = async {
+            let _ = client
+                .prompt_volumes()
+                .volume()
+                .on_the_fly(OtfVolumeRequest {
+                    keyword: "".to_string(),
+                    matching_type: OtfVolumeRequestMatchingType::ExactMatch,
+                    start_date: chrono::Utc::now().date_naive(),
+                    end_date: chrono::Utc::now().date_naive(),
+                    regions: None,
+                    platforms: None,
+                    organization_id: None,
+                })
+                .send()
+                .await?;
+            Ok(())
+        }
+        .await;
+        if let Err(error) = result {
+            if is_smoke_failure(&error) {
+                failures.push(format!(
+                    "{}: {error}",
+                    "POST /v2/prompt-volumes/volume/on-the-fly [required params]"
+                ));
+            }
+        }
+    }
+    {
+        let result: Result<(), Error> = async {
+            let _ = client
+                .prompt_volumes()
+                .volume()
+                .on_the_fly(OtfVolumeRequest {
+                    keyword: "".to_string(),
+                    matching_type: OtfVolumeRequestMatchingType::ExactMatch,
+                    start_date: chrono::Utc::now().date_naive(),
+                    end_date: chrono::Utc::now().date_naive(),
+                    regions: Some(vec!["".to_string()]),
+                    platforms: Some(vec!["".to_string()]),
+                    organization_id: Some("7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string()),
+                })
+                .send()
+                .await?;
+            Ok(())
+        }
+        .await;
+        if let Err(error) = result {
+            if is_smoke_failure(&error) {
+                failures.push(format!(
+                    "{}: {error}",
+                    "POST /v2/prompt-volumes/volume/on-the-fly [all params]"
+                ));
+            }
+        }
+    }
+    {
+        let result: Result<(), Error> = async {
+            let _ = client
+                .prompt_volumes()
+                .intents()
+                .on_the_fly(OtfIntentSharesQuery {
+                    keyword: "".to_string(),
+                    matching_type: OtfIntentSharesQueryMatchingType::ExactMatch,
+                    start_date: chrono::Utc::now().date_naive(),
+                    end_date: chrono::Utc::now().date_naive(),
+                    regions: None,
+                    platforms: None,
+                })
+                .send()
+                .await?;
+            Ok(())
+        }
+        .await;
+        if let Err(error) = result {
+            if is_smoke_failure(&error) {
+                failures.push(format!(
+                    "{}: {error}",
+                    "POST /v2/prompt-volumes/intents/on-the-fly [required params]"
+                ));
+            }
+        }
+    }
+    {
+        let result: Result<(), Error> = async {
+            let _ = client
+                .prompt_volumes()
+                .intents()
+                .on_the_fly(OtfIntentSharesQuery {
+                    keyword: "".to_string(),
+                    matching_type: OtfIntentSharesQueryMatchingType::ExactMatch,
+                    start_date: chrono::Utc::now().date_naive(),
+                    end_date: chrono::Utc::now().date_naive(),
+                    regions: Some(vec!["".to_string()]),
+                    platforms: Some(vec!["".to_string()]),
+                })
+                .send()
+                .await?;
+            Ok(())
+        }
+        .await;
+        if let Err(error) = result {
+            if is_smoke_failure(&error) {
+                failures.push(format!(
+                    "{}: {error}",
+                    "POST /v2/prompt-volumes/intents/on-the-fly [all params]"
+                ));
+            }
+        }
+    }
     assert!(failures.is_empty(), "smoke failures:\n{}", failures.join("\n"));
 }
 
