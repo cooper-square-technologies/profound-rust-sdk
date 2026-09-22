@@ -55,10 +55,13 @@ pub struct ShoppingBrandRow {
     pub rank: Option<i64>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub date: Option<String>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub topic: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub region: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub prompt: Option<DimensionRef>,
     #[serde(
@@ -134,6 +137,7 @@ pub struct ShoppingBrandsV2Query {
     /// Restrict to these asset names (a name or list). Overrides `scope`.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub assets: Option<ShoppingBrandsV2QueryAssets>,
+    /// A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub filter: Option<FilterNode>,
     /// Page size for scope=all; default 10, max 50.
@@ -279,6 +283,7 @@ pub struct ShoppingMerchantsV2Query {
     pub metrics: Option<Vec<ShoppingMerchantsV2QueryMetric>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub interval: Option<ShoppingMerchantsV2QueryInterval>,
+    /// A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub filter: Option<FilterNode>,
     /// Page size; default 10, max 50.
@@ -333,8 +338,10 @@ pub struct ShoppingProductRow {
     pub product: Option<serde_json::Value>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub date: Option<String>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub topic: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub prompt: Option<DimensionRef>,
     #[serde(
@@ -449,6 +456,7 @@ pub struct ShoppingProductsV2Query {
     /// Competitors returned when `target_product` is set.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub competitor_limit: Option<i64>,
+    /// A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub filter: Option<FilterNode>,
     /// Page size; default 10, max 50.
@@ -504,12 +512,16 @@ pub struct ShoppingProductsV2Response {
 pub struct ShoppingTriggerRateRow {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub date: Option<String>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub topic: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub region: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub persona: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub prompt: Option<DimensionRef>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -571,6 +583,7 @@ pub struct ShoppingTriggerRateV2Query {
     pub metrics: Option<Vec<ShoppingTriggerRateV2QueryMetric>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub interval: Option<ShoppingTriggerRateV2QueryInterval>,
+    /// A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub filter: Option<FilterNode>,
     /// Page size; default 10, max 50.

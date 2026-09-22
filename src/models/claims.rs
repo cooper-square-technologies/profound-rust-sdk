@@ -215,14 +215,19 @@ pub struct FactcheckClaimsRow {
     pub citation_sources: Option<Vec<ClaimCitationSource>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub model: Option<ClaimModelOccurrence>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub region: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub persona: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub prompt: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub topic: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tag: Option<DimensionRef>,
     /// Claim theme (string), or an `{id, name}` ref when sectioning by `theme`.

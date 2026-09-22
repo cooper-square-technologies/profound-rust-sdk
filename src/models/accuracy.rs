@@ -52,6 +52,7 @@ pub struct AccuracyBreakdownQuery {
     pub sort_by: Option<AccuracyBreakdownQuerySortBy>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub sort_order: Option<AccuracyBreakdownQuerySortOrder>,
+    /// Canonical grouped pagination plan for Accuracy Breakdown rows.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub pagination: Option<AccuracyPagination>,
 }
