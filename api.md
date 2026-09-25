@@ -145,9 +145,9 @@ Complete reference of every operation, grouped by resource. See [the README](./R
       - [Get Account Insights](#get-account-insights)
 - [`PromptVolumes`](#promptvolumes)
   - [`PromptVolumes Volume`](#promptvolumes-volume)
-    - [Get On The Fly Volume](#get-on-the-fly-volume)
+    - [Get Keyword Volume](#get-keyword-volume)
   - [`PromptVolumes Intents`](#promptvolumes-intents)
-    - [Get On The Fly Intent Shares](#get-on-the-fly-intent-shares)
+    - [Get Keyword Intent Shares](#get-keyword-intent-shares)
 
 ## Setup
 
@@ -1480,6 +1480,7 @@ let response = client
         comparison_start_date: None,
         comparison_end_date: None,
         category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+        languages: None,
         topic_ids: None,
         exclude_topic_ids: None,
         tag_ids: None,
@@ -1515,6 +1516,7 @@ let response = client
         comparison_start_date: None,
         comparison_end_date: None,
         category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+        languages: None,
         topic_ids: None,
         exclude_topic_ids: None,
         tag_ids: None,
@@ -1598,6 +1600,7 @@ let response = client
         comparison_start_date: None,
         comparison_end_date: None,
         category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+        languages: None,
         topic_ids: None,
         exclude_topic_ids: None,
         tag_ids: None,
@@ -1636,6 +1639,7 @@ let response = client
         comparison_start_date: None,
         comparison_end_date: None,
         category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+        languages: None,
         topic_ids: None,
         exclude_topic_ids: None,
         tag_ids: None,
@@ -1674,6 +1678,7 @@ let response = client
         comparison_start_date: None,
         comparison_end_date: None,
         category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+        languages: None,
         topic_ids: None,
         exclude_topic_ids: None,
         tag_ids: None,
@@ -1708,6 +1713,7 @@ let response = client
         comparison_start_date: None,
         comparison_end_date: None,
         category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+        languages: None,
         topic_ids: None,
         exclude_topic_ids: None,
         tag_ids: None,
@@ -1742,6 +1748,7 @@ let response = client
         comparison_start_date: None,
         comparison_end_date: None,
         category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+        languages: None,
         topic_ids: None,
         exclude_topic_ids: None,
         tag_ids: None,
@@ -1776,6 +1783,7 @@ let response = client
         comparison_start_date: None,
         comparison_end_date: None,
         category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+        languages: None,
         topic_ids: None,
         exclude_topic_ids: None,
         tag_ids: None,
@@ -1814,6 +1822,7 @@ let response = client
         comparison_start_date: None,
         comparison_end_date: None,
         category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+        languages: None,
         topic_ids: None,
         exclude_topic_ids: None,
         tag_ids: None,
@@ -3038,15 +3047,13 @@ let response = client
 
 ### `PromptVolumes Volume`
 
-#### Get On The Fly Volume
+#### Get Keyword Volume
 
 Weekly and monthly volume projections for one keyword.
 
-Each organization can look up 1,000 distinct normalized keywords per UTC
-day. Repeats consume no additional allowance. New keywords over the cap
-return 429 with X-KeywordQuota-* and Retry-After headers. Quota admission
-requires Redis (503 when unavailable); empty results and query failures
-retain the reservation. Slices with at most two users are omitted.
+Each organization can look up 1,000 distinct keywords per UTC day; over
+the cap returns 429 with Retry-After. Slices with two or fewer users are
+omitted for privacy.
 
 | Direction | Type |
 | --- | --- |
@@ -3072,14 +3079,12 @@ let response = client
 
 ### `PromptVolumes Intents`
 
-#### Get On The Fly Intent Shares
+#### Get Keyword Intent Shares
 
 Intent shares for one keyword across the requested cohort weeks.
 
-Shares are fractions from 0 to 1 over classified matching conversations.
-Cohorts with at most two matching users are omitted for privacy. This
-endpoint shares the volume endpoint's burst limit but consumes no daily
-keyword quota.
+Shares are fractions from 0 to 1. Cohorts with two or fewer matching users
+are omitted for privacy. Doesn't use the daily keyword allowance.
 
 | Direction | Type |
 | --- | --- |

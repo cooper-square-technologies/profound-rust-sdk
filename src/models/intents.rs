@@ -26,10 +26,12 @@ pub struct OtfIntentSharesQuery {
     pub matching_type: OtfIntentSharesQueryMatchingType,
     pub start_date: chrono::NaiveDate,
     pub end_date: chrono::NaiveDate,
+    /// ISO 3166-1 alpha-3 country codes (e.g. USA). Omit to include every region.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub regions: Option<Vec<String>>,
+    /// Platforms to restrict to. Omit to include every platform.
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub platforms: Option<Vec<String>>,
+    pub platforms: Option<Vec<OtfIntentSharesQueryPlatform>>,
 }
 
 impl OtfIntentSharesQuery {
@@ -105,6 +107,53 @@ impl From<&str> for OtfIntentSharesQueryMatchingType {
         match value {
             "exact_match" => Self::ExactMatch,
             "phrase_match" => Self::PhraseMatch,
+            other => Self::Unknown(other.to_owned()),
+        }
+    }
+}
+
+/// Match on `as_str()` (or build one with `From<&str>`) when you need a value
+/// this SDK version does not know. Matching `Unknown(_)` directly is an
+/// anti-pattern: that arm silently stops matching once a future SDK release
+/// adds the real variant.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[non_exhaustive]
+pub enum OtfIntentSharesQueryPlatform {
+    #[serde(rename = "chatgpt.com")]
+    ChatgptCom,
+    #[serde(rename = "gemini.google.com")]
+    GeminiGoogleCom,
+    #[serde(rename = "perplexity.ai")]
+    PerplexityAi,
+    /// A value not known to this version of the SDK, preserved verbatim.
+    #[serde(untagged)]
+    Unknown(String),
+}
+
+impl OtfIntentSharesQueryPlatform {
+    /// The wire value this variant serializes to.
+    pub fn as_str(&self) -> &str {
+        match self {
+            Self::ChatgptCom => "chatgpt.com",
+            Self::GeminiGoogleCom => "gemini.google.com",
+            Self::PerplexityAi => "perplexity.ai",
+            Self::Unknown(value) => value,
+        }
+    }
+}
+
+impl std::fmt::Display for OtfIntentSharesQueryPlatform {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.write_str(self.as_str())
+    }
+}
+
+impl From<&str> for OtfIntentSharesQueryPlatform {
+    fn from(value: &str) -> Self {
+        match value {
+            "chatgpt.com" => Self::ChatgptCom,
+            "gemini.google.com" => Self::GeminiGoogleCom,
+            "perplexity.ai" => Self::PerplexityAi,
             other => Self::Unknown(other.to_owned()),
         }
     }
