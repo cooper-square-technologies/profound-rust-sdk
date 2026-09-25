@@ -11,7 +11,7 @@ impl VolumeResource {
         Self { client }
     }
 
-    /// Get On The Fly Volume
+    /// Get Keyword Volume
     pub fn on_the_fly(&self, body: crate::models::OtfVolumeRequest) -> OnTheFlyRequestBuilder {
         OnTheFlyRequestBuilder::new(self.client.clone(), body)
     }
@@ -19,11 +19,9 @@ impl VolumeResource {
 
 /// Weekly and monthly volume projections for one keyword.
 ///
-/// Each organization can look up 1,000 distinct normalized keywords per UTC
-/// day. Repeats consume no additional allowance. New keywords over the cap
-/// return 429 with X-KeywordQuota-* and Retry-After headers. Quota admission
-/// requires Redis (503 when unavailable); empty results and query failures
-/// retain the reservation. Slices with at most two users are omitted.
+/// Each organization can look up 1,000 distinct keywords per UTC day; over
+/// the cap returns 429 with Retry-After. Slices with two or fewer users are
+/// omitted for privacy.
 #[must_use = "a request builder does nothing until `.send().await` is called"]
 pub struct OnTheFlyRequestBuilder {
     client: crate::client::ProfoundClient,

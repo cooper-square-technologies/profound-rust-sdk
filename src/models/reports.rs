@@ -2266,8 +2266,6 @@ pub enum BotProviderFilterValueVariant1 {
     You,
     #[serde(rename = "you.com")]
     YouCom,
-    #[serde(rename = "xai")]
-    Xai,
     #[serde(rename = "grok")]
     Grok,
     #[serde(rename = "gemini")]
@@ -2311,7 +2309,6 @@ impl BotProviderFilterValueVariant1 {
             Self::Duckduckgo => "duckduckgo",
             Self::You => "you",
             Self::YouCom => "you.com",
-            Self::Xai => "xai",
             Self::Grok => "grok",
             Self::Gemini => "gemini",
             Self::Mistral => "mistral",
@@ -2350,7 +2347,6 @@ impl From<&str> for BotProviderFilterValueVariant1 {
             "duckduckgo" => Self::Duckduckgo,
             "you" => Self::You,
             "you.com" => Self::YouCom,
-            "xai" => Self::Xai,
             "grok" => Self::Grok,
             "gemini" => Self::Gemini,
             "mistral" => Self::Mistral,
@@ -2401,8 +2397,6 @@ pub enum BotProviderFilterValueVariant2 {
     You,
     #[serde(rename = "you.com")]
     YouCom,
-    #[serde(rename = "xai")]
-    Xai,
     #[serde(rename = "grok")]
     Grok,
     #[serde(rename = "gemini")]
@@ -2446,7 +2440,6 @@ impl BotProviderFilterValueVariant2 {
             Self::Duckduckgo => "duckduckgo",
             Self::You => "you",
             Self::YouCom => "you.com",
-            Self::Xai => "xai",
             Self::Grok => "grok",
             Self::Gemini => "gemini",
             Self::Mistral => "mistral",
@@ -2485,7 +2478,6 @@ impl From<&str> for BotProviderFilterValueVariant2 {
             "duckduckgo" => Self::Duckduckgo,
             "you" => Self::You,
             "you.com" => Self::YouCom,
-            "xai" => Self::Xai,
             "grok" => Self::Grok,
             "gemini" => Self::Gemini,
             "mistral" => Self::Mistral,

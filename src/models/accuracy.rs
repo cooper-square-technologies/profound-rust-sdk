@@ -15,6 +15,8 @@ pub struct AccuracyBreakdownQuery {
     pub comparison_end_date: Option<String>,
     pub category_id: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub languages: Option<Vec<String>>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
     pub topic_ids: Option<Vec<String>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub exclude_topic_ids: Option<bool>,
@@ -69,6 +71,7 @@ impl AccuracyBreakdownQuery {
             comparison_start_date: None,
             comparison_end_date: None,
             category_id: category_id.into(),
+            languages: None,
             topic_ids: None,
             exclude_topic_ids: None,
             tag_ids: None,
@@ -247,6 +250,8 @@ pub struct AccuracyOverviewQuery {
     pub comparison_end_date: Option<String>,
     pub category_id: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub languages: Option<Vec<String>>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
     pub topic_ids: Option<Vec<String>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub exclude_topic_ids: Option<bool>,
@@ -286,6 +291,7 @@ impl AccuracyOverviewQuery {
             comparison_start_date: None,
             comparison_end_date: None,
             category_id: category_id.into(),
+            languages: None,
             topic_ids: None,
             exclude_topic_ids: None,
             tag_ids: None,
@@ -431,6 +437,8 @@ pub struct ClaimBreakdownQuery {
     pub comparison_end_date: Option<String>,
     pub category_id: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub languages: Option<Vec<String>>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
     pub topic_ids: Option<Vec<String>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub exclude_topic_ids: Option<bool>,
@@ -472,6 +480,7 @@ impl ClaimBreakdownQuery {
             comparison_start_date: None,
             comparison_end_date: None,
             category_id: category_id.into(),
+            languages: None,
             topic_ids: None,
             exclude_topic_ids: None,
             tag_ids: None,
@@ -541,8 +550,10 @@ pub struct ClaimCitationRow {
     pub snippet: String,
     #[serde(rename = "citationCount", serialize_with = "crate::number::serialize")]
     pub citation_count: f64,
+    /// Citation share as a 0-100 percentage; 0.4718 means 0.4718%.
     #[serde(rename = "citationShare", serialize_with = "crate::number::serialize")]
     pub citation_share: f64,
+    /// Change in citation share in percentage points.
     #[serde(
         rename = "citationShareDelta",
         default,
@@ -561,6 +572,8 @@ pub struct ClaimCitationsQuery {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub comparison_end_date: Option<String>,
     pub category_id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub languages: Option<Vec<String>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub topic_ids: Option<Vec<String>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -611,6 +624,7 @@ impl ClaimCitationsQuery {
             comparison_start_date: None,
             comparison_end_date: None,
             category_id: category_id.into(),
+            languages: None,
             topic_ids: None,
             exclude_topic_ids: None,
             tag_ids: None,
@@ -706,6 +720,8 @@ pub struct ClusterExampleRunsQuery {
     pub comparison_end_date: Option<String>,
     pub category_id: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub languages: Option<Vec<String>>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
     pub topic_ids: Option<Vec<String>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub exclude_topic_ids: Option<bool>,
@@ -751,6 +767,7 @@ impl ClusterExampleRunsQuery {
             comparison_start_date: None,
             comparison_end_date: None,
             category_id: category_id.into(),
+            languages: None,
             topic_ids: None,
             exclude_topic_ids: None,
             tag_ids: None,
@@ -866,8 +883,10 @@ pub struct InaccuracyDriverRow {
     pub snippet: String,
     #[serde(rename = "snippetClaimId")]
     pub snippet_claim_id: String,
+    /// Claim response share as a 0-100 percent, not citation share.
     #[serde(rename = "claimOccurrence", serialize_with = "crate::number::serialize")]
     pub claim_occurrence: f64,
+    /// Change in claim occurrence in percentage points.
     #[serde(
         rename = "claimOccurrenceDelta",
         default,
@@ -893,6 +912,8 @@ pub struct InaccuracyDriversQuery {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub comparison_end_date: Option<String>,
     pub category_id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub languages: Option<Vec<String>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub topic_ids: Option<Vec<String>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -931,6 +952,7 @@ impl InaccuracyDriversQuery {
             comparison_start_date: None,
             comparison_end_date: None,
             category_id: category_id.into(),
+            languages: None,
             topic_ids: None,
             exclude_topic_ids: None,
             tag_ids: None,
@@ -1006,6 +1028,8 @@ pub struct InaccurateClustersQuery {
     pub comparison_end_date: Option<String>,
     pub category_id: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub languages: Option<Vec<String>>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
     pub topic_ids: Option<Vec<String>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub exclude_topic_ids: Option<bool>,
@@ -1051,6 +1075,7 @@ impl InaccurateClustersQuery {
             comparison_start_date: None,
             comparison_end_date: None,
             category_id: category_id.into(),
+            languages: None,
             topic_ids: None,
             exclude_topic_ids: None,
             tag_ids: None,
@@ -1127,6 +1152,8 @@ pub struct InaccurateThemesQuery {
     pub comparison_end_date: Option<String>,
     pub category_id: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub languages: Option<Vec<String>>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
     pub topic_ids: Option<Vec<String>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub exclude_topic_ids: Option<bool>,
@@ -1172,6 +1199,7 @@ impl InaccurateThemesQuery {
             comparison_start_date: None,
             comparison_end_date: None,
             category_id: category_id.into(),
+            languages: None,
             topic_ids: None,
             exclude_topic_ids: None,
             tag_ids: None,
@@ -1234,6 +1262,8 @@ pub struct TopInaccurateClaimsQuery {
     pub comparison_end_date: Option<String>,
     pub category_id: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub languages: Option<Vec<String>>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
     pub topic_ids: Option<Vec<String>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub exclude_topic_ids: Option<bool>,
@@ -1271,6 +1301,7 @@ impl TopInaccurateClaimsQuery {
             comparison_start_date: None,
             comparison_end_date: None,
             category_id: category_id.into(),
+            languages: None,
             topic_ids: None,
             exclude_topic_ids: None,
             tag_ids: None,

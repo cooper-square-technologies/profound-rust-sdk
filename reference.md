@@ -985,7 +985,7 @@ Get Account Insights
 
 ### client.prompt_volumes().volume().on_the_fly(…)
 
-Get On The Fly Volume
+Get Keyword Volume
 
 - HTTP: `POST /v2/prompt-volumes/volume/on-the-fly`
 - Request body: `application/json`
@@ -994,7 +994,7 @@ Get On The Fly Volume
 
 ### client.prompt_volumes().intents().on_the_fly(…)
 
-Get On The Fly Intent Shares
+Get Keyword Intent Shares
 
 - HTTP: `POST /v2/prompt-volumes/intents/on-the-fly`
 - Request body: `application/json`
