@@ -53,9 +53,14 @@ pub struct BotsReportQuery {
     /// Domain to query logs for.
     pub domain: String,
     /// Start date for logs. Accepts: YYYY-MM-DD, YYYY-MM-DD HH:MM, YYYY-MM-DD HH:MM:SS, or full ISO timestamp.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub start_date: chrono::DateTime<chrono::FixedOffset>,
     /// End date for logs. Accepts same formats as start_date. Defaults to now if omitted.
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::datetime::option::deserialize"
+    )]
     pub end_date: Option<chrono::DateTime<chrono::FixedOffset>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub organization_id: Option<String>,
@@ -119,9 +124,14 @@ pub struct BotsReportQueryV2 {
     /// Domain to query logs for.
     pub domain: String,
     /// Start date for logs. Accepts: YYYY-MM-DD, YYYY-MM-DD HH:MM, YYYY-MM-DD HH:MM:SS, or full ISO timestamp.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub start_date: chrono::DateTime<chrono::FixedOffset>,
     /// End date in UTC. Accepts same formats as start_date. Defaults to now UTC if omitted.
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::datetime::option::deserialize"
+    )]
     pub end_date: Option<chrono::DateTime<chrono::FixedOffset>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub organization_id: Option<String>,
@@ -198,23 +208,35 @@ pub struct CitationRow {
     pub rank: Option<i64>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub date: Option<String>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub model: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub topic: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub region: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub persona: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub prompt: Option<DimensionRef>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub count: Option<i64>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub citation_share: Option<f64>,
     /// Pages only.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub first_cited_at: Option<String>,
+    /// Additional properties not captured by the named fields.
+    #[serde(flatten)]
+    pub additional_properties: std::collections::HashMap<String, serde_json::Value>,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -245,8 +267,10 @@ pub struct CitationsQuery {
     pub pagination: Option<Pagination>,
     pub category_id: String,
     /// Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub start_date: chrono::DateTime<chrono::FixedOffset>,
     /// End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub end_date: chrono::DateTime<chrono::FixedOffset>,
     /// List of filters to apply to the citations report.
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -328,6 +352,9 @@ pub struct CitationsV2Info {
     pub metrics: Vec<String>,
     /// Analysis types the citations were drawn from.
     pub analysis_types: Vec<String>,
+    /// Additional properties not captured by the named fields.
+    #[serde(flatten)]
+    pub additional_properties: std::collections::HashMap<String, serde_json::Value>,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -465,16 +492,31 @@ pub struct QueryFanoutRow {
     pub prompt: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub query: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub total_fanouts: Option<f64>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub fanouts_per_execution: Option<f64>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub share: Option<f64>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub query_variations: Option<i64>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub rank: Option<i64>,
+    /// Additional properties not captured by the named fields.
+    #[serde(flatten)]
+    pub additional_properties: std::collections::HashMap<String, serde_json::Value>,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -495,8 +537,10 @@ pub struct QueryFanoutsQuery {
     pub pagination: Option<Pagination>,
     pub category_id: String,
     /// Start date. Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub start_date: chrono::DateTime<chrono::FixedOffset>,
     /// End date. Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub end_date: chrono::DateTime<chrono::FixedOffset>,
     /// Filters to apply to the query fanout report.
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -555,6 +599,9 @@ pub struct QueryFanoutsV2Info {
     pub metrics: Vec<String>,
     /// Caveat about which runs the fanout metrics cover.
     pub coverage_note: String,
+    /// Additional properties not captured by the named fields.
+    #[serde(flatten)]
+    pub additional_properties: std::collections::HashMap<String, serde_json::Value>,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -570,6 +617,7 @@ pub struct QueryFanoutsV2Query {
     pub metrics: Option<Vec<QueryFanoutsV2QueryMetric>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub interval: Option<QueryFanoutsV2QueryInterval>,
+    /// A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub filter: Option<FilterNode>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -661,9 +709,14 @@ pub struct ReferralsQuery {
     /// Domain to query logs for.
     pub domain: String,
     /// Start date for logs. Accepts: YYYY-MM-DD, YYYY-MM-DD HH:MM, YYYY-MM-DD HH:MM:SS, or full ISO timestamp.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub start_date: chrono::DateTime<chrono::FixedOffset>,
     /// End date for logs. Accepts same formats as start_date. Defaults to now if omitted.
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::datetime::option::deserialize"
+    )]
     pub end_date: Option<chrono::DateTime<chrono::FixedOffset>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub organization_id: Option<String>,
@@ -727,9 +780,14 @@ pub struct ReferralsQueryV2 {
     /// Domain to query logs for.
     pub domain: String,
     /// Start date for logs. Accepts: YYYY-MM-DD, YYYY-MM-DD HH:MM, YYYY-MM-DD HH:MM:SS, or full ISO timestamp.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub start_date: chrono::DateTime<chrono::FixedOffset>,
     /// End date in UTC. Accepts same formats as start_date. Defaults to now UTC if omitted.
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::datetime::option::deserialize"
+    )]
     pub end_date: Option<chrono::DateTime<chrono::FixedOffset>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub organization_id: Option<String>,
@@ -813,12 +871,33 @@ pub struct RootDomainFilter {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[non_exhaustive]
 pub struct SentimentMetrics {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub positive_sentiment: Option<f64>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub negative_sentiment: Option<f64>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub occurrence: Option<f64>,
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
+    pub citation_share: Option<f64>,
+    /// Additional properties not captured by the named fields.
+    #[serde(flatten)]
+    pub additional_properties: std::collections::HashMap<String, serde_json::Value>,
 }
 
 ///
@@ -858,8 +937,10 @@ pub struct SentimentQuery {
     pub pagination: Option<Pagination>,
     pub category_id: String,
     /// Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub start_date: chrono::DateTime<chrono::FixedOffset>,
     /// End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub end_date: chrono::DateTime<chrono::FixedOffset>,
     /// List of filters to apply to the sentiment report.
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -900,32 +981,62 @@ impl SentimentQuery {
 pub struct SentimentRow {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub date: Option<String>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub model: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub topic: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub region: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub prompt: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub persona: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tag: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub theme: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub claim: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub run: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub competitor: Option<DimensionRef>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub page: Option<String>,
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub positive_sentiment: Option<f64>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub negative_sentiment: Option<f64>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub occurrence: Option<f64>,
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
+    pub citation_share: Option<f64>,
     /// Comparison-window metrics (when requested).
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub previous: Option<SentimentMetrics>,
@@ -935,6 +1046,9 @@ pub struct SentimentRow {
     pub cited_websites: Option<Vec<String>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub rank: Option<i64>,
+    /// Additional properties not captured by the named fields.
+    #[serde(flatten)]
+    pub additional_properties: std::collections::HashMap<String, serde_json::Value>,
 }
 
 ///
@@ -943,10 +1057,16 @@ pub struct SentimentRow {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[non_exhaustive]
 pub struct SentimentScores {
+    #[serde(serialize_with = "crate::number::serialize")]
     pub positive_sentiment: f64,
+    #[serde(serialize_with = "crate::number::serialize")]
     pub negative_sentiment: f64,
     pub assessment_count: i64,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub occurrence: Option<f64>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub response_count: Option<i64>,
@@ -1003,6 +1123,9 @@ pub struct SentimentV2Info {
     /// Comparison-window end (when requested).
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub comparison_end_date: Option<String>,
+    /// Additional properties not captured by the named fields.
+    #[serde(flatten)]
+    pub additional_properties: std::collections::HashMap<String, serde_json::Value>,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -1045,11 +1168,14 @@ pub struct SentimentV2Query {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub comparison_end_date: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub source: Option<SentimentV2QuerySource>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
     pub group_by: Option<Vec<SentimentV2QueryGroupBy>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub metrics: Option<Vec<SentimentV2QueryMetric>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub interval: Option<SentimentV2QueryInterval>,
+    /// A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub filter: Option<FilterNode>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -1085,6 +1211,7 @@ impl SentimentV2Query {
             end_date: end_date.into(),
             comparison_start_date: None,
             comparison_end_date: None,
+            source: None,
             group_by: None,
             metrics: None,
             interval: None,
@@ -1184,14 +1311,24 @@ pub struct SentimentV2ReportQuery {
     pub category_id: String,
     pub asset_name: String,
     /// Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub start_date: chrono::DateTime<chrono::FixedOffset>,
     /// End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub end_date: chrono::DateTime<chrono::FixedOffset>,
     /// Start of the previous period for delta computation.
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::datetime::option::deserialize"
+    )]
     pub comparison_start_date: Option<chrono::DateTime<chrono::FixedOffset>>,
     /// End of the previous period for delta computation.
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::datetime::option::deserialize"
+    )]
     pub comparison_end_date: Option<chrono::DateTime<chrono::FixedOffset>>,
     /// Date bucket for the report. Only used when dimensions includes date.
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -1332,12 +1469,15 @@ pub struct StreamCitationsQuery {
     ///             
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub order_by: Option<std::collections::HashMap<String, StreamCitationsQueryOrderBy>>,
+    /// Offset-based pagination parameters.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub pagination: Option<Pagination>,
     pub category_id: String,
     /// Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub start_date: chrono::DateTime<chrono::FixedOffset>,
     /// End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub end_date: chrono::DateTime<chrono::FixedOffset>,
     /// List of filters to apply to the citations report.
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -1389,12 +1529,15 @@ pub struct StreamSentimentQuery {
     ///         
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub order_by: Option<std::collections::HashMap<String, StreamSentimentQueryOrderBy>>,
+    /// Offset-based pagination parameters.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub pagination: Option<Pagination>,
     pub category_id: String,
     /// Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub start_date: chrono::DateTime<chrono::FixedOffset>,
     /// End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub end_date: chrono::DateTime<chrono::FixedOffset>,
     /// List of filters to apply to the sentiment report.
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -1446,12 +1589,15 @@ pub struct StreamVisibilityQuery {
     ///         
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub order_by: Option<std::collections::HashMap<String, StreamVisibilityQueryOrderBy>>,
+    /// Offset-based pagination parameters.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub pagination: Option<Pagination>,
     pub category_id: String,
     /// Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub start_date: chrono::DateTime<chrono::FixedOffset>,
     /// End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub end_date: chrono::DateTime<chrono::FixedOffset>,
     /// List of filters to apply to the visibility report.
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -1544,8 +1690,10 @@ pub struct VisibilityQuery {
     pub pagination: Option<Pagination>,
     pub category_id: String,
     /// Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub start_date: chrono::DateTime<chrono::FixedOffset>,
     /// End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub end_date: chrono::DateTime<chrono::FixedOffset>,
     /// List of filters to apply to the visibility report.
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -1591,22 +1739,42 @@ pub struct VisibilityRow {
     pub rank: Option<i64>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub date: Option<String>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub model: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub topic: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub region: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub prompt: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub persona: Option<DimensionRef>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub visibility_score: Option<f64>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub share_of_voice: Option<f64>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub average_position: Option<f64>,
+    /// Additional properties not captured by the named fields.
+    #[serde(flatten)]
+    pub additional_properties: std::collections::HashMap<String, serde_json::Value>,
 }
 
 ///
@@ -1637,6 +1805,9 @@ pub struct VisibilityV2Info {
     /// Echoed `assets` selection (filter clause, name, or list), or null.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub asset_filter: Option<VisibilityV2InfoAssetFilter>,
+    /// Additional properties not captured by the named fields.
+    #[serde(flatten)]
+    pub additional_properties: std::collections::HashMap<String, serde_json::Value>,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -1657,6 +1828,7 @@ pub struct VisibilityV2Query {
     /// A name (`is`), a list (`in`), or {op,value} with op `is`/`in`/`not_in`.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub assets: Option<VisibilityV2QueryAssets>,
+    /// A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub filter: Option<FilterNode>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -2094,8 +2266,6 @@ pub enum BotProviderFilterValueVariant1 {
     You,
     #[serde(rename = "you.com")]
     YouCom,
-    #[serde(rename = "xai")]
-    Xai,
     #[serde(rename = "grok")]
     Grok,
     #[serde(rename = "gemini")]
@@ -2114,6 +2284,8 @@ pub enum BotProviderFilterValueVariant1 {
     Commoncrawl,
     #[serde(rename = "openclaw")]
     Openclaw,
+    #[serde(rename = "exa")]
+    Exa,
     /// A value not known to this version of the SDK, preserved verbatim.
     #[serde(untagged)]
     Unknown(String),
@@ -2137,7 +2309,6 @@ impl BotProviderFilterValueVariant1 {
             Self::Duckduckgo => "duckduckgo",
             Self::You => "you",
             Self::YouCom => "you.com",
-            Self::Xai => "xai",
             Self::Grok => "grok",
             Self::Gemini => "gemini",
             Self::Mistral => "mistral",
@@ -2147,6 +2318,7 @@ impl BotProviderFilterValueVariant1 {
             Self::Yahoo => "yahoo",
             Self::Commoncrawl => "commoncrawl",
             Self::Openclaw => "openclaw",
+            Self::Exa => "exa",
             Self::Unknown(value) => value,
         }
     }
@@ -2175,7 +2347,6 @@ impl From<&str> for BotProviderFilterValueVariant1 {
             "duckduckgo" => Self::Duckduckgo,
             "you" => Self::You,
             "you.com" => Self::YouCom,
-            "xai" => Self::Xai,
             "grok" => Self::Grok,
             "gemini" => Self::Gemini,
             "mistral" => Self::Mistral,
@@ -2185,6 +2356,7 @@ impl From<&str> for BotProviderFilterValueVariant1 {
             "yahoo" => Self::Yahoo,
             "commoncrawl" => Self::Commoncrawl,
             "openclaw" => Self::Openclaw,
+            "exa" => Self::Exa,
             other => Self::Unknown(other.to_owned()),
         }
     }
@@ -2225,8 +2397,6 @@ pub enum BotProviderFilterValueVariant2 {
     You,
     #[serde(rename = "you.com")]
     YouCom,
-    #[serde(rename = "xai")]
-    Xai,
     #[serde(rename = "grok")]
     Grok,
     #[serde(rename = "gemini")]
@@ -2245,6 +2415,8 @@ pub enum BotProviderFilterValueVariant2 {
     Commoncrawl,
     #[serde(rename = "openclaw")]
     Openclaw,
+    #[serde(rename = "exa")]
+    Exa,
     /// A value not known to this version of the SDK, preserved verbatim.
     #[serde(untagged)]
     Unknown(String),
@@ -2268,7 +2440,6 @@ impl BotProviderFilterValueVariant2 {
             Self::Duckduckgo => "duckduckgo",
             Self::You => "you",
             Self::YouCom => "you.com",
-            Self::Xai => "xai",
             Self::Grok => "grok",
             Self::Gemini => "gemini",
             Self::Mistral => "mistral",
@@ -2278,6 +2449,7 @@ impl BotProviderFilterValueVariant2 {
             Self::Yahoo => "yahoo",
             Self::Commoncrawl => "commoncrawl",
             Self::Openclaw => "openclaw",
+            Self::Exa => "exa",
             Self::Unknown(value) => value,
         }
     }
@@ -2306,7 +2478,6 @@ impl From<&str> for BotProviderFilterValueVariant2 {
             "duckduckgo" => Self::Duckduckgo,
             "you" => Self::You,
             "you.com" => Self::YouCom,
-            "xai" => Self::Xai,
             "grok" => Self::Grok,
             "gemini" => Self::Gemini,
             "mistral" => Self::Mistral,
@@ -2316,6 +2487,7 @@ impl From<&str> for BotProviderFilterValueVariant2 {
             "yahoo" => Self::Yahoo,
             "commoncrawl" => Self::Commoncrawl,
             "openclaw" => Self::Openclaw,
+            "exa" => Self::Exa,
             other => Self::Unknown(other.to_owned()),
         }
     }
@@ -5900,6 +6072,49 @@ pub enum SentimentV2PromptIdFilterValue {
 /// adds the real variant.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[non_exhaustive]
+pub enum SentimentV2QuerySource {
+    #[serde(rename = "response")]
+    Response,
+    #[serde(rename = "citation")]
+    Citation,
+    /// A value not known to this version of the SDK, preserved verbatim.
+    #[serde(untagged)]
+    Unknown(String),
+}
+
+impl SentimentV2QuerySource {
+    /// The wire value this variant serializes to.
+    pub fn as_str(&self) -> &str {
+        match self {
+            Self::Response => "response",
+            Self::Citation => "citation",
+            Self::Unknown(value) => value,
+        }
+    }
+}
+
+impl std::fmt::Display for SentimentV2QuerySource {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.write_str(self.as_str())
+    }
+}
+
+impl From<&str> for SentimentV2QuerySource {
+    fn from(value: &str) -> Self {
+        match value {
+            "response" => Self::Response,
+            "citation" => Self::Citation,
+            other => Self::Unknown(other.to_owned()),
+        }
+    }
+}
+
+/// Match on `as_str()` (or build one with `From<&str>`) when you need a value
+/// this SDK version does not know. Matching `Unknown(_)` directly is an
+/// anti-pattern: that arm silently stops matching once a future SDK release
+/// adds the real variant.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[non_exhaustive]
 pub enum SentimentV2QueryGroupBy {
     #[serde(rename = "date")]
     Date,
@@ -5986,6 +6201,8 @@ pub enum SentimentV2QueryMetric {
     NegativeSentiment,
     #[serde(rename = "occurrence")]
     Occurrence,
+    #[serde(rename = "citation_share")]
+    CitationShare,
     /// A value not known to this version of the SDK, preserved verbatim.
     #[serde(untagged)]
     Unknown(String),
@@ -5998,6 +6215,7 @@ impl SentimentV2QueryMetric {
             Self::PositiveSentiment => "positive_sentiment",
             Self::NegativeSentiment => "negative_sentiment",
             Self::Occurrence => "occurrence",
+            Self::CitationShare => "citation_share",
             Self::Unknown(value) => value,
         }
     }
@@ -6015,6 +6233,7 @@ impl From<&str> for SentimentV2QueryMetric {
             "positive_sentiment" => Self::PositiveSentiment,
             "negative_sentiment" => Self::NegativeSentiment,
             "occurrence" => Self::Occurrence,
+            "citation_share" => Self::CitationShare,
             other => Self::Unknown(other.to_owned()),
         }
     }
@@ -8711,6 +8930,8 @@ pub enum AppRoutesV2AnswerEngineInsightsReportsSentimentSortSpecField {
     PositiveSentiment,
     #[serde(rename = "negative_sentiment")]
     NegativeSentiment,
+    #[serde(rename = "citation_share")]
+    CitationShare,
     /// A value not known to this version of the SDK, preserved verbatim.
     #[serde(untagged)]
     Unknown(String),
@@ -8723,6 +8944,7 @@ impl AppRoutesV2AnswerEngineInsightsReportsSentimentSortSpecField {
             Self::Occurrence => "occurrence",
             Self::PositiveSentiment => "positive_sentiment",
             Self::NegativeSentiment => "negative_sentiment",
+            Self::CitationShare => "citation_share",
             Self::Unknown(value) => value,
         }
     }
@@ -8740,6 +8962,7 @@ impl From<&str> for AppRoutesV2AnswerEngineInsightsReportsSentimentSortSpecField
             "occurrence" => Self::Occurrence,
             "positive_sentiment" => Self::PositiveSentiment,
             "negative_sentiment" => Self::NegativeSentiment,
+            "citation_share" => Self::CitationShare,
             other => Self::Unknown(other.to_owned()),
         }
     }

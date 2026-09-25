@@ -66,9 +66,17 @@ pub struct ListProjectsResponse {
 pub struct LiveGeneration {
     pub run_id: String,
     pub status: LiveGenerationStatus,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::datetime::option::deserialize"
+    )]
     pub started_at: Option<chrono::DateTime<chrono::FixedOffset>>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::datetime::option::deserialize"
+    )]
     pub finished_at: Option<chrono::DateTime<chrono::FixedOffset>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub error: Option<String>,
@@ -107,7 +115,11 @@ pub struct Project {
     pub task_count: Option<i64>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub new_task_count: Option<i64>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::datetime::option::deserialize"
+    )]
     pub retired_at: Option<chrono::DateTime<chrono::FixedOffset>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub retired_reason: Option<String>,
@@ -115,9 +127,17 @@ pub struct Project {
     pub latest_version_id: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub version_count: Option<i64>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::datetime::option::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::FixedOffset>>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::datetime::option::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::FixedOffset>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub live_generation: Option<LiveGeneration>,
@@ -165,7 +185,11 @@ pub struct ProjectDetail {
     pub task_count: Option<i64>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub new_task_count: Option<i64>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::datetime::option::deserialize"
+    )]
     pub retired_at: Option<chrono::DateTime<chrono::FixedOffset>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub retired_reason: Option<String>,
@@ -173,9 +197,17 @@ pub struct ProjectDetail {
     pub latest_version_id: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub version_count: Option<i64>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::datetime::option::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::FixedOffset>>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::datetime::option::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::FixedOffset>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub live_generation: Option<LiveGeneration>,
@@ -294,7 +326,11 @@ pub struct ProjectListItem {
     pub initiated_by_user_id: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub topics: Option<Vec<String>>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::datetime::option::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::FixedOffset>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub task_types: Option<Vec<String>>,
@@ -302,7 +338,11 @@ pub struct ProjectListItem {
     pub task_count: Option<i64>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub new_task_count: Option<i64>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::datetime::option::deserialize"
+    )]
     pub retired_at: Option<chrono::DateTime<chrono::FixedOffset>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub retired_reason: Option<String>,
@@ -330,7 +370,11 @@ pub struct ProjectStatusPayload {
     pub status: ProjectStatusPayloadStatus,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub live_generation: Option<LiveGeneration>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::datetime::option::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::FixedOffset>>,
 }
 

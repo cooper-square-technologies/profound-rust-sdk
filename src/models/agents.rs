@@ -21,6 +21,7 @@ pub struct Agent {
     /// Current status of the agent.
     pub status: AgentStatus,
     /// When the agent was created.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub created_at: chrono::DateTime<chrono::FixedOffset>,
     /// Short description of the agent, if provided.
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -43,6 +44,7 @@ pub struct AgentDetail {
     /// Current status of the agent.
     pub status: AgentStatus,
     /// When the agent was created.
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub created_at: chrono::DateTime<chrono::FixedOffset>,
     /// Short description of the agent, if provided.
     #[serde(default, skip_serializing_if = "Option::is_none")]

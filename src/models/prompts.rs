@@ -16,6 +16,7 @@ pub struct AnswerRow {
     pub run_id: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub date: Option<String>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub model: Option<DimensionRef>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -47,13 +48,18 @@ pub struct AnswerRow {
     pub analysis_types: Option<Vec<String>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub sentiment_claims: Option<Vec<serde_json::Value>>,
+    /// Additional properties not captured by the named fields.
+    #[serde(flatten)]
+    pub additional_properties: std::collections::HashMap<String, serde_json::Value>,
 }
 
 /// Body for the answers endpoint.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct AnswersQuery {
     pub category_id: String,
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub start_date: chrono::DateTime<chrono::FixedOffset>,
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub end_date: chrono::DateTime<chrono::FixedOffset>,
     /// Pagination parameters for the results. Default is 10,000 rows with no offset.
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -95,7 +101,11 @@ impl AnswersQuery {
 pub struct AnswersRawData {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub run_id: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::datetime::option::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::FixedOffset>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub prompt: Option<String>,
@@ -189,6 +199,9 @@ pub struct AnswersV2Info {
     pub filter: Option<serde_json::Value>,
     /// Row fields returned (echoes `include`, or all fields when omitted).
     pub include: Vec<String>,
+    /// Additional properties not captured by the named fields.
+    #[serde(flatten)]
+    pub additional_properties: std::collections::HashMap<String, serde_json::Value>,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -373,6 +386,7 @@ pub struct FilterNode {
     pub and: Option<Vec<FilterNode>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub or: Option<Vec<FilterNode>>,
+    /// A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub not: Option<Box<FilterNode>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]

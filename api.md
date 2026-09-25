@@ -143,6 +143,11 @@ Complete reference of every operation, grouped by resource. See [the README](./R
   - [`Ads OpenaiAds`](#ads-openaiads)
     - [`Ads OpenaiAds AdAccount`](#ads-openaiads-adaccount)
       - [Get Account Insights](#get-account-insights)
+- [`PromptVolumes`](#promptvolumes)
+  - [`PromptVolumes Volume`](#promptvolumes-volume)
+    - [Get Keyword Volume](#get-keyword-volume)
+  - [`PromptVolumes Intents`](#promptvolumes-intents)
+    - [Get Keyword Intent Shares](#get-keyword-intent-shares)
 
 ## Setup
 
@@ -931,6 +936,7 @@ let mut events = client
         end_date: "".to_string(),
         comparison_start_date: None,
         comparison_end_date: None,
+        source: None,
         group_by: None,
         metrics: None,
         interval: None,
@@ -1109,6 +1115,7 @@ let response = client
         end_date: "".to_string(),
         comparison_start_date: None,
         comparison_end_date: None,
+        source: None,
         group_by: None,
         metrics: None,
         interval: None,
@@ -1473,6 +1480,7 @@ let response = client
         comparison_start_date: None,
         comparison_end_date: None,
         category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+        languages: None,
         topic_ids: None,
         exclude_topic_ids: None,
         tag_ids: None,
@@ -1508,6 +1516,7 @@ let response = client
         comparison_start_date: None,
         comparison_end_date: None,
         category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+        languages: None,
         topic_ids: None,
         exclude_topic_ids: None,
         tag_ids: None,
@@ -1591,6 +1600,7 @@ let response = client
         comparison_start_date: None,
         comparison_end_date: None,
         category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+        languages: None,
         topic_ids: None,
         exclude_topic_ids: None,
         tag_ids: None,
@@ -1629,6 +1639,7 @@ let response = client
         comparison_start_date: None,
         comparison_end_date: None,
         category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+        languages: None,
         topic_ids: None,
         exclude_topic_ids: None,
         tag_ids: None,
@@ -1667,6 +1678,7 @@ let response = client
         comparison_start_date: None,
         comparison_end_date: None,
         category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+        languages: None,
         topic_ids: None,
         exclude_topic_ids: None,
         tag_ids: None,
@@ -1701,6 +1713,7 @@ let response = client
         comparison_start_date: None,
         comparison_end_date: None,
         category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+        languages: None,
         topic_ids: None,
         exclude_topic_ids: None,
         tag_ids: None,
@@ -1735,6 +1748,7 @@ let response = client
         comparison_start_date: None,
         comparison_end_date: None,
         category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+        languages: None,
         topic_ids: None,
         exclude_topic_ids: None,
         tag_ids: None,
@@ -1769,6 +1783,7 @@ let response = client
         comparison_start_date: None,
         comparison_end_date: None,
         category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+        languages: None,
         topic_ids: None,
         exclude_topic_ids: None,
         tag_ids: None,
@@ -1807,6 +1822,7 @@ let response = client
         comparison_start_date: None,
         comparison_end_date: None,
         category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+        languages: None,
         topic_ids: None,
         exclude_topic_ids: None,
         tag_ids: None,
@@ -2340,7 +2356,7 @@ let response = client
         "7c9e6679-7425-40de-944b-e07fc1f90ae7",
         SearchKnowledgeBaseRequest {
             query: "x".to_string(),
-            top_k: 0,
+            top_k: 1,
             return_full_page: None,
             filters: None,
         },
@@ -3023,6 +3039,70 @@ let response = client
     .openai_ads()
     .ad_account()
     .retrieve_insights()
+    .send()
+    .await?;
+```
+
+## `PromptVolumes`
+
+### `PromptVolumes Volume`
+
+#### Get Keyword Volume
+
+Weekly and monthly volume projections for one keyword.
+
+Each organization can look up 1,000 distinct keywords per UTC day; over
+the cap returns 429 with Retry-After. Slices with two or fewer users are
+omitted for privacy.
+
+| Direction | Type |
+| --- | --- |
+| Request | [`OtfVolumeRequest`](./src/models/volume.rs) |
+| Response | [`OtfVolumeResponse`](./src/models/volume.rs) |
+
+```rust
+let response = client
+    .prompt_volumes()
+    .volume()
+    .on_the_fly(OtfVolumeRequest {
+        keyword: "".to_string(),
+        matching_type: OtfVolumeRequestMatchingType::ExactMatch,
+        start_date: chrono::Utc::now().date_naive(),
+        end_date: chrono::Utc::now().date_naive(),
+        regions: None,
+        platforms: None,
+        organization_id: None,
+    })
+    .send()
+    .await?;
+```
+
+### `PromptVolumes Intents`
+
+#### Get Keyword Intent Shares
+
+Intent shares for one keyword across the requested cohort weeks.
+
+Shares are fractions from 0 to 1. Cohorts with two or fewer matching users
+are omitted for privacy. Doesn't use the daily keyword allowance.
+
+| Direction | Type |
+| --- | --- |
+| Request | [`OtfIntentSharesQuery`](./src/models/intents.rs) |
+| Response | [`OtfIntentSharesResponse`](./src/models/intents.rs) |
+
+```rust
+let response = client
+    .prompt_volumes()
+    .intents()
+    .on_the_fly(OtfIntentSharesQuery {
+        keyword: "".to_string(),
+        matching_type: OtfIntentSharesQueryMatchingType::ExactMatch,
+        start_date: chrono::Utc::now().date_naive(),
+        end_date: chrono::Utc::now().date_naive(),
+        regions: None,
+        platforms: None,
+    })
     .send()
     .await?;
 ```

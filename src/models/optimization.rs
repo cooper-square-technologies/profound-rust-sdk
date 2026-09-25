@@ -12,6 +12,7 @@ use serde::{Deserialize, Serialize};
 #[non_exhaustive]
 pub struct AeoScore {
     pub target_zone: AeoScoreTargetZone,
+    #[serde(serialize_with = "crate::number::serialize")]
     pub value: f64,
 }
 
@@ -21,7 +22,9 @@ pub struct AeoScore {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[non_exhaustive]
 pub struct AeoScoreTargetZone {
+    #[serde(serialize_with = "crate::number::serialize")]
     pub low: f64,
+    #[serde(serialize_with = "crate::number::serialize")]
     pub high: f64,
 }
 
@@ -32,7 +35,9 @@ pub struct AeoScoreTargetZone {
 #[non_exhaustive]
 pub struct AnalysisBreakdown {
     pub title: String,
+    #[serde(serialize_with = "crate::number::serialize")]
     pub weight: f64,
+    #[serde(serialize_with = "crate::number::serialize")]
     pub score: f64,
 }
 
@@ -124,6 +129,7 @@ impl From<&str> for ContentFormat {
 pub struct ContentOptimization {
     pub id: String,
     pub title: String,
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub created_at: chrono::DateTime<chrono::FixedOffset>,
     #[serde(default)]
     pub extracted_input: Option<String>,
@@ -259,6 +265,7 @@ pub struct Recommendation {
 #[non_exhaustive]
 pub struct RecommendationImpact {
     pub section: String,
+    #[serde(serialize_with = "crate::number::serialize")]
     pub score: f64,
 }
 

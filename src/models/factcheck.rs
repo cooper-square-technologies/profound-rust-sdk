@@ -26,28 +26,42 @@ pub struct CitationScoreRef {
 pub struct FactcheckScoreRow {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub date: Option<String>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub model: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub region: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub persona: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub prompt: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub topic: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tag: Option<DimensionRef>,
+    /// An ``{id, name}`` reference for a grouped dimension value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub theme: Option<DimensionRef>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub citation: Option<CitationScoreRef>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub accuracy: Option<f64>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub accurate: Option<i64>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub inaccurate: Option<i64>,
+    /// Additional properties not captured by the named fields.
+    #[serde(flatten)]
+    pub additional_properties: std::collections::HashMap<String, serde_json::Value>,
 }
 
 ///
@@ -75,6 +89,9 @@ pub struct FactcheckScoresInfo {
     pub filter: Option<serde_json::Value>,
     /// Dimensions the scores are sliced by (empty → headline).
     pub group_by: Vec<String>,
+    /// Additional properties not captured by the named fields.
+    #[serde(flatten)]
+    pub additional_properties: std::collections::HashMap<String, serde_json::Value>,
 }
 
 /// Accuracy scores. `group_by` picks the slice (one or two dimensions); empty → the headline score.

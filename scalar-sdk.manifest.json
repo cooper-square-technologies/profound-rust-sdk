@@ -1,7 +1,7 @@
 {
   "name": "Profound",
   "slug": "profound",
-  "generatorVersion": "0.30.1",
+  "generatorVersion": "0.33.3",
   "servers": [
     "https://api.tryprofound.com"
   ],
@@ -232,6 +232,27 @@
               "kind": "primitive",
               "type": "string",
               "format": "uuid"
+            }
+          },
+          {
+            "name": "languages",
+            "publicName": "languages",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "array",
+                  "items": {
+                    "kind": "primitive",
+                    "type": "string"
+                  }
+                },
+                {
+                  "kind": "null"
+                }
+              ]
             }
           },
           {
@@ -553,7 +574,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 1
+              }
             }
           },
           {
@@ -564,7 +587,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 0
+              }
             }
           },
           {
@@ -1008,6 +1033,16 @@
             }
           },
           {
+            "name": "markdownContentTruncated",
+            "publicName": "markdownContentTruncated",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "boolean"
+            }
+          },
+          {
             "name": "claims",
             "publicName": "claims",
             "required": false,
@@ -1285,6 +1320,27 @@
               "kind": "primitive",
               "type": "string",
               "format": "uuid"
+            }
+          },
+          {
+            "name": "languages",
+            "publicName": "languages",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "array",
+                  "items": {
+                    "kind": "primitive",
+                    "type": "string"
+                  }
+                },
+                {
+                  "kind": "null"
+                }
+              ]
             }
           },
           {
@@ -2493,6 +2549,31 @@
             }
           },
           {
+            "name": "outputs_expanded",
+            "publicName": "outputs_expanded",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "record",
+                  "value": {
+                    "kind": "ref",
+                    "name": "agent_run_output_detail"
+                  },
+                  "propertyNames": {
+                    "kind": "primitive",
+                    "type": "string"
+                  }
+                },
+                {
+                  "kind": "null"
+                }
+              ]
+            }
+          },
+          {
             "name": "steps",
             "publicName": "steps",
             "required": false,
@@ -2511,6 +2592,45 @@
                   "kind": "null"
                 }
               ]
+            }
+          }
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "agent_run_output_detail",
+      "source": "agent_run_output_detail",
+      "publicAliases": [],
+      "deprecated": false,
+      "type": {
+        "kind": "object",
+        "properties": [
+          {
+            "name": "title",
+            "publicName": "title",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "primitive",
+                  "type": "string"
+                },
+                {
+                  "kind": "null"
+                }
+              ]
+            }
+          },
+          {
+            "name": "value",
+            "publicName": "value",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "unknown"
             }
           }
         ],
@@ -4522,7 +4642,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 200,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -4540,7 +4663,10 @@
               "variants": [
                 {
                   "kind": "primitive",
-                  "type": "integer"
+                  "type": "integer",
+                  "validation": {
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -4939,7 +5065,6 @@
                     "duckduckgo",
                     "you",
                     "you.com",
-                    "xai",
                     "grok",
                     "gemini",
                     "mistral",
@@ -4948,7 +5073,8 @@
                     "baidu",
                     "yahoo",
                     "commoncrawl",
-                    "openclaw"
+                    "openclaw",
+                    "exa"
                   ],
                   "names": [
                     "Openai",
@@ -4965,7 +5091,6 @@
                     "Duckduckgo",
                     "You",
                     "YouCom",
-                    "Xai",
                     "Grok",
                     "Gemini",
                     "Mistral",
@@ -4974,7 +5099,8 @@
                     "Baidu",
                     "Yahoo",
                     "Commoncrawl",
-                    "Openclaw"
+                    "Openclaw",
+                    "Exa"
                   ],
                   "deprecations": [
                     false,
@@ -5022,7 +5148,6 @@
                       "duckduckgo",
                       "you",
                       "you.com",
-                      "xai",
                       "grok",
                       "gemini",
                       "mistral",
@@ -5031,7 +5156,8 @@
                       "baidu",
                       "yahoo",
                       "commoncrawl",
-                      "openclaw"
+                      "openclaw",
+                      "exa"
                     ],
                     "names": [
                       "Openai",
@@ -5048,7 +5174,6 @@
                       "Duckduckgo",
                       "You",
                       "YouCom",
-                      "Xai",
                       "Grok",
                       "Gemini",
                       "Mistral",
@@ -5057,7 +5182,8 @@
                       "Baidu",
                       "Yahoo",
                       "Commoncrawl",
-                      "Openclaw"
+                      "Openclaw",
+                      "Exa"
                     ],
                     "deprecations": [
                       false,
@@ -7821,7 +7947,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 50,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -7839,7 +7968,10 @@
               "variants": [
                 {
                   "kind": "primitive",
-                  "type": "integer"
+                  "type": "integer",
+                  "validation": {
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -7977,6 +8109,27 @@
               "kind": "primitive",
               "type": "string",
               "format": "uuid"
+            }
+          },
+          {
+            "name": "languages",
+            "publicName": "languages",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "array",
+                  "items": {
+                    "kind": "primitive",
+                    "type": "string"
+                  }
+                },
+                {
+                  "kind": "null"
+                }
+              ]
             }
           },
           {
@@ -8642,6 +8795,27 @@
             }
           },
           {
+            "name": "languages",
+            "publicName": "languages",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "array",
+                  "items": {
+                    "kind": "primitive",
+                    "type": "string"
+                  }
+                },
+                {
+                  "kind": "null"
+                }
+              ]
+            }
+          },
+          {
             "name": "topic_ids",
             "publicName": "topic_ids",
             "required": false,
@@ -8864,7 +9038,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 1
+              }
             }
           },
           {
@@ -8875,7 +9051,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 0
+              }
             }
           },
           {
@@ -9394,6 +9572,27 @@
             }
           },
           {
+            "name": "languages",
+            "publicName": "languages",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "array",
+                  "items": {
+                    "kind": "primitive",
+                    "type": "string"
+                  }
+                },
+                {
+                  "kind": "null"
+                }
+              ]
+            }
+          },
+          {
             "name": "topic_ids",
             "publicName": "topic_ids",
             "required": false,
@@ -9616,7 +9815,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 1
+              }
             }
           },
           {
@@ -9627,7 +9828,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 0
+              }
             }
           }
         ],
@@ -10793,7 +10996,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "minimum": 1,
+                    "maximum": 5
+                  }
                 },
                 {
                   "kind": "null"
@@ -11178,7 +11384,10 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "maximum": 50000,
+                "exclusiveMinimum": 0
+              }
             }
           },
           {
@@ -12688,7 +12897,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 100,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -12706,7 +12918,10 @@
               "variants": [
                 {
                   "kind": "primitive",
-                  "type": "integer"
+                  "type": "integer",
+                  "validation": {
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -13625,7 +13840,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 100,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -13643,7 +13861,10 @@
               "variants": [
                 {
                   "kind": "primitive",
-                  "type": "integer"
+                  "type": "integer",
+                  "validation": {
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -14256,6 +14477,27 @@
             }
           },
           {
+            "name": "languages",
+            "publicName": "languages",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "array",
+                  "items": {
+                    "kind": "primitive",
+                    "type": "string"
+                  }
+                },
+                {
+                  "kind": "null"
+                }
+              ]
+            }
+          },
+          {
             "name": "topic_ids",
             "publicName": "topic_ids",
             "required": false,
@@ -14467,7 +14709,10 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 1,
+                "maximum": 50
+              }
             }
           }
         ],
@@ -14749,6 +14994,27 @@
             }
           },
           {
+            "name": "languages",
+            "publicName": "languages",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "array",
+                  "items": {
+                    "kind": "primitive",
+                    "type": "string"
+                  }
+                },
+                {
+                  "kind": "null"
+                }
+              ]
+            }
+          },
+          {
             "name": "topic_ids",
             "publicName": "topic_ids",
             "required": false,
@@ -14979,7 +15245,10 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 1,
+                "maximum": 10000
+              }
             }
           },
           {
@@ -14990,7 +15259,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 0
+              }
             }
           },
           {
@@ -15266,6 +15537,27 @@
             }
           },
           {
+            "name": "languages",
+            "publicName": "languages",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "array",
+                  "items": {
+                    "kind": "primitive",
+                    "type": "string"
+                  }
+                },
+                {
+                  "kind": "null"
+                }
+              ]
+            }
+          },
+          {
             "name": "topic_ids",
             "publicName": "topic_ids",
             "required": false,
@@ -15477,7 +15769,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 1
+              }
             }
           },
           {
@@ -15488,7 +15782,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 0
+              }
             }
           },
           {
@@ -17460,6 +17756,428 @@
       }
     },
     {
+      "name": "otf_intent_share_data",
+      "source": "otf_intent_share_data",
+      "publicAliases": [],
+      "deprecated": false,
+      "type": {
+        "kind": "object",
+        "properties": [
+          {
+            "name": "main_classification",
+            "publicName": "main_classification",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "string"
+            }
+          },
+          {
+            "name": "sub_category_classification",
+            "publicName": "sub_category_classification",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "primitive",
+                  "type": "string"
+                },
+                {
+                  "kind": "null"
+                }
+              ]
+            }
+          },
+          {
+            "name": "pct_conversation",
+            "publicName": "pct_conversation",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "number"
+            }
+          }
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "otf_intent_shares_query",
+      "source": "otf_intent_shares_query",
+      "publicAliases": [],
+      "deprecated": false,
+      "type": {
+        "kind": "object",
+        "properties": [
+          {
+            "name": "keyword",
+            "publicName": "keyword",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "string"
+            }
+          },
+          {
+            "name": "matching_type",
+            "publicName": "matching_type",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "enum",
+              "values": [
+                "exact_match",
+                "phrase_match"
+              ],
+              "names": [
+                "ExactMatch",
+                "PhraseMatch"
+              ],
+              "deprecations": [
+                false,
+                false
+              ]
+            }
+          },
+          {
+            "name": "start_date",
+            "publicName": "start_date",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "end_date",
+            "publicName": "end_date",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "regions",
+            "publicName": "regions",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "array",
+              "items": {
+                "kind": "primitive",
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "platforms",
+            "publicName": "platforms",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "array",
+              "items": {
+                "kind": "enum",
+                "values": [
+                  "chatgpt.com",
+                  "gemini.google.com",
+                  "perplexity.ai"
+                ],
+                "names": [
+                  "ChatgptCom",
+                  "GeminiGoogleCom",
+                  "PerplexityAi"
+                ],
+                "deprecations": [
+                  false,
+                  false,
+                  false
+                ]
+              }
+            }
+          }
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "otf_intent_shares_response",
+      "source": "otf_intent_shares_response",
+      "publicAliases": [],
+      "deprecated": false,
+      "type": {
+        "kind": "object",
+        "properties": [
+          {
+            "name": "info",
+            "publicName": "info",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "ref",
+              "name": "volume_response_info"
+            }
+          },
+          {
+            "name": "data",
+            "publicName": "data",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "array",
+              "items": {
+                "kind": "ref",
+                "name": "otf_intent_share_data"
+              }
+            }
+          }
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "otf_volume_data",
+      "source": "otf_volume_data",
+      "publicAliases": [],
+      "deprecated": false,
+      "type": {
+        "kind": "object",
+        "properties": [
+          {
+            "name": "country_code",
+            "publicName": "country_code",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "string"
+            }
+          },
+          {
+            "name": "platform",
+            "publicName": "platform",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "string"
+            }
+          },
+          {
+            "name": "matching_type",
+            "publicName": "matching_type",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "string"
+            }
+          },
+          {
+            "name": "frequency",
+            "publicName": "frequency",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "publicName": "date",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "volume",
+            "publicName": "volume",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "number"
+            }
+          }
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "otf_volume_request",
+      "source": "otf_volume_request",
+      "publicAliases": [],
+      "deprecated": false,
+      "type": {
+        "kind": "object",
+        "properties": [
+          {
+            "name": "keyword",
+            "publicName": "keyword",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "string"
+            }
+          },
+          {
+            "name": "matching_type",
+            "publicName": "matching_type",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "enum",
+              "values": [
+                "exact_match",
+                "phrase_match"
+              ],
+              "names": [
+                "ExactMatch",
+                "PhraseMatch"
+              ],
+              "deprecations": [
+                false,
+                false
+              ]
+            }
+          },
+          {
+            "name": "start_date",
+            "publicName": "start_date",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "end_date",
+            "publicName": "end_date",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "regions",
+            "publicName": "regions",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "array",
+              "items": {
+                "kind": "primitive",
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "platforms",
+            "publicName": "platforms",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "array",
+              "items": {
+                "kind": "enum",
+                "values": [
+                  "chatgpt.com",
+                  "gemini.google.com",
+                  "perplexity.ai"
+                ],
+                "names": [
+                  "ChatgptCom",
+                  "GeminiGoogleCom",
+                  "PerplexityAi"
+                ],
+                "deprecations": [
+                  false,
+                  false,
+                  false
+                ]
+              }
+            }
+          },
+          {
+            "name": "organization_id",
+            "publicName": "organization_id",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "primitive",
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "kind": "null"
+                }
+              ]
+            }
+          }
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "otf_volume_response",
+      "source": "otf_volume_response",
+      "publicAliases": [],
+      "deprecated": false,
+      "type": {
+        "kind": "object",
+        "properties": [
+          {
+            "name": "info",
+            "publicName": "info",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "ref",
+              "name": "volume_response_info"
+            }
+          },
+          {
+            "name": "data",
+            "publicName": "data",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "array",
+              "items": {
+                "kind": "ref",
+                "name": "otf_volume_data"
+              }
+            }
+          }
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
       "name": "pagination",
       "source": "pagination",
       "publicAliases": [],
@@ -17475,7 +18193,10 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "maximum": 50000,
+                "exclusiveMinimum": 0
+              }
             }
           },
           {
@@ -17486,7 +18207,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 0
+              }
             }
           }
         ],
@@ -18210,7 +18933,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 0
+              }
             }
           },
           {
@@ -18221,7 +18946,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 0
+              }
             }
           },
           {
@@ -18288,7 +19015,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 0
+              }
             }
           },
           {
@@ -18407,7 +19136,10 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "maximum": 10485760,
+                "exclusiveMinimum": 0
+              }
             }
           },
           {
@@ -18659,7 +19391,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 0
+              }
             }
           },
           {
@@ -18670,7 +19404,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 0
+              }
             }
           },
           {
@@ -18737,7 +19473,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 0
+              }
             }
           },
           {
@@ -19529,7 +20267,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 0
+              }
             }
           },
           {
@@ -19540,7 +20280,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 0
+              }
             }
           },
           {
@@ -19875,7 +20617,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "minimum": 1,
+                    "maximum": 5
+                  }
                 },
                 {
                   "kind": "null"
@@ -20132,7 +20877,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "minimum": 1,
+                    "maximum": 5
+                  }
                 },
                 {
                   "kind": "null"
@@ -22108,7 +22856,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 50,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -22126,7 +22877,10 @@
               "variants": [
                 {
                   "kind": "primitive",
-                  "type": "integer"
+                  "type": "integer",
+                  "validation": {
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -24105,7 +24859,10 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 1,
+                "maximum": 100
+              }
             }
           },
           {
@@ -24277,6 +25034,24 @@
           {
             "name": "occurrence",
             "publicName": "occurrence",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "primitive",
+                  "type": "number"
+                },
+                {
+                  "kind": "null"
+                }
+              ]
+            }
+          },
+          {
+            "name": "citation_share",
+            "publicName": "citation_share",
             "required": false,
             "deprecated": false,
             "type": {
@@ -24861,6 +25636,24 @@
             }
           },
           {
+            "name": "page",
+            "publicName": "page",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "primitive",
+                  "type": "string"
+                },
+                {
+                  "kind": "null"
+                }
+              ]
+            }
+          },
+          {
             "name": "positive_sentiment",
             "publicName": "positive_sentiment",
             "required": false,
@@ -24899,6 +25692,24 @@
           {
             "name": "occurrence",
             "publicName": "occurrence",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "primitive",
+                  "type": "number"
+                },
+                {
+                  "kind": "null"
+                }
+              ]
+            }
+          },
+          {
+            "name": "citation_share",
+            "publicName": "citation_share",
             "required": false,
             "deprecated": false,
             "type": {
@@ -25793,6 +26604,27 @@
             }
           },
           {
+            "name": "source",
+            "publicName": "source",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "enum",
+              "values": [
+                "response",
+                "citation"
+              ],
+              "names": [
+                "Response",
+                "Citation"
+              ],
+              "deprecations": [
+                false,
+                false
+              ]
+            }
+          },
+          {
             "name": "group_by",
             "publicName": "group_by",
             "required": false,
@@ -25858,14 +26690,17 @@
                     "values": [
                       "positive_sentiment",
                       "negative_sentiment",
-                      "occurrence"
+                      "occurrence",
+                      "citation_share"
                     ],
                     "names": [
                       "PositiveSentiment",
                       "NegativeSentiment",
-                      "Occurrence"
+                      "Occurrence",
+                      "CitationShare"
                     ],
                     "deprecations": [
+                      false,
                       false,
                       false,
                       false
@@ -25951,7 +26786,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 50,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -25969,7 +26807,10 @@
               "variants": [
                 {
                   "kind": "primitive",
-                  "type": "integer"
+                  "type": "integer",
+                  "validation": {
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -28037,7 +28878,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 50,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -28056,7 +28900,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 50000,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -28660,7 +29507,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 50,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -28679,7 +29529,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 50000,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -29377,7 +30230,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 1
+              }
             }
           },
           {
@@ -29409,7 +30264,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 50,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -29428,7 +30286,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 50000,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -29938,7 +30799,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 50,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -29957,7 +30821,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 50000,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -31763,6 +32630,27 @@
             }
           },
           {
+            "name": "languages",
+            "publicName": "languages",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "array",
+                  "items": {
+                    "kind": "primitive",
+                    "type": "string"
+                  }
+                },
+                {
+                  "kind": "null"
+                }
+              ]
+            }
+          },
+          {
             "name": "topic_ids",
             "publicName": "topic_ids",
             "required": false,
@@ -31974,7 +32862,10 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 1,
+                "maximum": 50
+              }
             }
           }
         ],
@@ -32499,7 +33390,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "minimum": 1,
+                    "maximum": 5
+                  }
                 },
                 {
                   "kind": "null"
@@ -34185,7 +35079,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 50,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -34203,7 +35100,10 @@
               "variants": [
                 {
                   "kind": "primitive",
-                  "type": "integer"
+                  "type": "integer",
+                  "validation": {
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -34262,6 +35162,59 @@
                 "kind": "ref",
                 "name": "visibility_row"
               }
+            }
+          }
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "volume_response_info",
+      "source": "volume_response_info",
+      "publicAliases": [],
+      "deprecated": false,
+      "type": {
+        "kind": "object",
+        "properties": [
+          {
+            "name": "total_rows",
+            "publicName": "total_rows",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "truncated",
+            "publicName": "truncated",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "query",
+            "publicName": "query",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "object",
+                  "properties": [],
+                  "additionalProperties": {
+                    "kind": "unknown"
+                  }
+                },
+                {
+                  "kind": "null"
+                }
+              ]
             }
           }
         ],
@@ -35217,7 +36170,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 50,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -36264,7 +37220,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 50,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -36455,14 +37414,17 @@
               "values": [
                 "occurrence",
                 "positive_sentiment",
-                "negative_sentiment"
+                "negative_sentiment",
+                "citation_share"
               ],
               "names": [
                 "Occurrence",
                 "PositiveSentiment",
-                "NegativeSentiment"
+                "NegativeSentiment",
+                "CitationShare"
               ],
               "deprecations": [
+                false,
                 false,
                 false,
                 false
@@ -36648,7 +37610,10 @@
     "documents",
     "ads",
     "ads.openaiAds",
-    "ads.openaiAds.adAccount"
+    "ads.openaiAds.adAccount",
+    "promptVolumes",
+    "promptVolumes.volume",
+    "promptVolumes.intents"
   ],
   "publicResources": [
     "organizations",
@@ -36677,7 +37642,10 @@
     "documents",
     "ads",
     "ads.openaiAds",
-    "ads.openaiAds.adAccount"
+    "ads.openaiAds.adAccount",
+    "promptVolumes",
+    "promptVolumes.volume",
+    "promptVolumes.intents"
   ],
   "operations": [
     {
@@ -37399,13 +38367,15 @@
           "name": "order_by",
           "required": false,
           "style": "form",
-          "explode": true
+          "explode": true,
+          "defaultValue": "created_at"
         },
         {
           "name": "order_dir",
           "required": false,
           "style": "form",
-          "explode": true
+          "explode": true,
+          "defaultValue": "desc"
         },
         {
           "name": "analysis_type",
@@ -40247,6 +41217,7 @@
         "end_date",
         "comparison_start_date",
         "comparison_end_date",
+        "source",
         "group_by",
         "metrics",
         "interval",
@@ -40264,6 +41235,7 @@
         "end_date",
         "comparison_start_date",
         "comparison_end_date",
+        "source",
         "group_by",
         "metrics",
         "interval",
@@ -40297,6 +41269,10 @@
         },
         {
           "name": "comparison_end_date",
+          "required": false
+        },
+        {
+          "name": "source",
           "required": false
         },
         {
@@ -41213,6 +42189,7 @@
         "end_date",
         "comparison_start_date",
         "comparison_end_date",
+        "source",
         "group_by",
         "metrics",
         "interval",
@@ -41230,6 +42207,7 @@
         "end_date",
         "comparison_start_date",
         "comparison_end_date",
+        "source",
         "group_by",
         "metrics",
         "interval",
@@ -41263,6 +42241,10 @@
         },
         {
           "name": "comparison_end_date",
+          "required": false
+        },
+        {
+          "name": "source",
           "required": false
         },
         {
@@ -42997,6 +43979,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -43017,6 +44000,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -43051,6 +44035,10 @@
         {
           "name": "category_id",
           "required": true
+        },
+        {
+          "name": "languages",
+          "required": false
         },
         {
           "name": "topic_ids",
@@ -43188,6 +44176,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -43215,6 +44204,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -43256,6 +44246,10 @@
         {
           "name": "category_id",
           "required": true
+        },
+        {
+          "name": "languages",
+          "required": false
         },
         {
           "name": "topic_ids",
@@ -43625,6 +44619,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -43648,6 +44643,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -43685,6 +44681,10 @@
         {
           "name": "category_id",
           "required": true
+        },
+        {
+          "name": "languages",
+          "required": false
         },
         {
           "name": "topic_ids",
@@ -43834,6 +44834,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -43857,6 +44858,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -43894,6 +44896,10 @@
         {
           "name": "category_id",
           "required": true
+        },
+        {
+          "name": "languages",
+          "required": false
         },
         {
           "name": "topic_ids",
@@ -44043,6 +45049,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -44062,6 +45069,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -44095,6 +45103,10 @@
         {
           "name": "category_id",
           "required": true
+        },
+        {
+          "name": "languages",
+          "required": false
         },
         {
           "name": "topic_ids",
@@ -44228,6 +45240,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -44247,6 +45260,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -44280,6 +45294,10 @@
         {
           "name": "category_id",
           "required": true
+        },
+        {
+          "name": "languages",
+          "required": false
         },
         {
           "name": "topic_ids",
@@ -44413,6 +45431,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -44432,6 +45451,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -44465,6 +45485,10 @@
         {
           "name": "category_id",
           "required": true
+        },
+        {
+          "name": "languages",
+          "required": false
         },
         {
           "name": "topic_ids",
@@ -44598,6 +45622,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -44621,6 +45646,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -44658,6 +45684,10 @@
         {
           "name": "category_id",
           "required": true
+        },
+        {
+          "name": "languages",
+          "required": false
         },
         {
           "name": "topic_ids",
@@ -44807,6 +45837,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -44828,6 +45859,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -44863,6 +45895,10 @@
         {
           "name": "category_id",
           "required": true
+        },
+        {
+          "name": "languages",
+          "required": false
         },
         {
           "name": "topic_ids",
@@ -46391,7 +47427,8 @@
           "name": "version",
           "required": false,
           "style": "form",
-          "explode": true
+          "explode": true,
+          "defaultValue": "published"
         }
       ],
       "headerParamDetails": [],
@@ -46765,7 +47802,8 @@
           "name": "version",
           "required": false,
           "style": "form",
-          "explode": true
+          "explode": true,
+          "defaultValue": "published"
         }
       ],
       "headerParamDetails": [],
@@ -50367,6 +51405,250 @@
       },
       "responseModel": {
         "name": "insights_response",
+        "publicAliases": []
+      },
+      "result": {
+        "successStatus": "200",
+        "errorStatuses": [
+          "422"
+        ]
+      },
+      "errorResponses": [
+        {
+          "status": "422",
+          "contentType": "application/json",
+          "encoding": "json",
+          "contents": [
+            {
+              "contentType": "application/json",
+              "encoding": "json"
+            }
+          ],
+          "model": {
+            "name": "http_validation_error",
+            "publicAliases": []
+          }
+        }
+      ],
+      "responseLinks": [],
+      "transport": "http"
+    },
+    {
+      "resource": "promptVolumes.volume",
+      "publicResource": "promptVolumes.volume",
+      "operation": "onTheFly",
+      "publicOperation": "onTheFly",
+      "deprecated": false,
+      "method": "POST",
+      "path": "/v2/prompt-volumes/volume/on-the-fly",
+      "pathParams": [],
+      "publicPathParams": [],
+      "queryParams": [],
+      "publicQueryParams": [],
+      "headerParams": [],
+      "publicHeaderParams": [],
+      "bodyParams": [
+        "keyword",
+        "matching_type",
+        "start_date",
+        "end_date",
+        "regions",
+        "platforms",
+        "organization_id"
+      ],
+      "publicBodyParams": [
+        "keyword",
+        "matching_type",
+        "start_date",
+        "end_date",
+        "regions",
+        "platforms",
+        "organization_id"
+      ],
+      "bodyParamDetails": [
+        {
+          "name": "keyword",
+          "required": true
+        },
+        {
+          "name": "matching_type",
+          "required": true
+        },
+        {
+          "name": "start_date",
+          "required": true
+        },
+        {
+          "name": "end_date",
+          "required": true
+        },
+        {
+          "name": "regions",
+          "required": false
+        },
+        {
+          "name": "platforms",
+          "required": false
+        },
+        {
+          "name": "organization_id",
+          "required": false
+        }
+      ],
+      "pathParamDetails": [],
+      "queryParamDetails": [],
+      "headerParamDetails": [],
+      "cookieParams": [],
+      "publicCookieParams": [],
+      "cookieParamDetails": [],
+      "paramsModel": {
+        "publicName": "VolumeOnTheFlyParams"
+      },
+      "requestBody": {
+        "contentType": "application/json",
+        "encoding": "json",
+        "contents": [
+          {
+            "contentType": "application/json",
+            "encoding": "json"
+          }
+        ],
+        "required": true,
+        "publicName": "body",
+        "publicIdentifier": "body"
+      },
+      "response": {
+        "status": "200",
+        "contentType": "application/json",
+        "encoding": "json",
+        "contents": [
+          {
+            "contentType": "application/json",
+            "encoding": "json"
+          }
+        ]
+      },
+      "responseModel": {
+        "name": "otf_volume_response",
+        "publicAliases": []
+      },
+      "result": {
+        "successStatus": "200",
+        "errorStatuses": [
+          "422"
+        ]
+      },
+      "errorResponses": [
+        {
+          "status": "422",
+          "contentType": "application/json",
+          "encoding": "json",
+          "contents": [
+            {
+              "contentType": "application/json",
+              "encoding": "json"
+            }
+          ],
+          "model": {
+            "name": "http_validation_error",
+            "publicAliases": []
+          }
+        }
+      ],
+      "responseLinks": [],
+      "transport": "http"
+    },
+    {
+      "resource": "promptVolumes.intents",
+      "publicResource": "promptVolumes.intents",
+      "operation": "onTheFly",
+      "publicOperation": "onTheFly",
+      "deprecated": false,
+      "method": "POST",
+      "path": "/v2/prompt-volumes/intents/on-the-fly",
+      "pathParams": [],
+      "publicPathParams": [],
+      "queryParams": [],
+      "publicQueryParams": [],
+      "headerParams": [],
+      "publicHeaderParams": [],
+      "bodyParams": [
+        "keyword",
+        "matching_type",
+        "start_date",
+        "end_date",
+        "regions",
+        "platforms"
+      ],
+      "publicBodyParams": [
+        "keyword",
+        "matching_type",
+        "start_date",
+        "end_date",
+        "regions",
+        "platforms"
+      ],
+      "bodyParamDetails": [
+        {
+          "name": "keyword",
+          "required": true
+        },
+        {
+          "name": "matching_type",
+          "required": true
+        },
+        {
+          "name": "start_date",
+          "required": true
+        },
+        {
+          "name": "end_date",
+          "required": true
+        },
+        {
+          "name": "regions",
+          "required": false
+        },
+        {
+          "name": "platforms",
+          "required": false
+        }
+      ],
+      "pathParamDetails": [],
+      "queryParamDetails": [],
+      "headerParamDetails": [],
+      "cookieParams": [],
+      "publicCookieParams": [],
+      "cookieParamDetails": [],
+      "paramsModel": {
+        "publicName": "IntentOnTheFlyParams"
+      },
+      "requestBody": {
+        "contentType": "application/json",
+        "encoding": "json",
+        "contents": [
+          {
+            "contentType": "application/json",
+            "encoding": "json"
+          }
+        ],
+        "required": true,
+        "publicName": "body",
+        "publicIdentifier": "body"
+      },
+      "response": {
+        "status": "200",
+        "contentType": "application/json",
+        "encoding": "json",
+        "contents": [
+          {
+            "contentType": "application/json",
+            "encoding": "json"
+          }
+        ]
+      },
+      "responseModel": {
+        "name": "otf_intent_shares_response",
         "publicAliases": []
       },
       "result": {

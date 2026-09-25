@@ -983,6 +983,24 @@ Get Account Insights
 - Response body: `application/json`
 - Errors: `422`
 
+### client.prompt_volumes().volume().on_the_fly(…)
+
+Get Keyword Volume
+
+- HTTP: `POST /v2/prompt-volumes/volume/on-the-fly`
+- Request body: `application/json`
+- Response body: `application/json`
+- Errors: `422`
+
+### client.prompt_volumes().intents().on_the_fly(…)
+
+Get Keyword Intent Shares
+
+- HTTP: `POST /v2/prompt-volumes/intents/on-the-fly`
+- Request body: `application/json`
+- Response body: `application/json`
+- Errors: `422`
+
 ## Models
 
 - `AeoScore`
@@ -1010,6 +1028,7 @@ Get Account Insights
 - `AgentDetail`
 - `AgentGraph`
 - `AgentRun`
+- `AgentRunOutputDetail`
 - `AgentRunStatus`
 - `AgentRunStep`
 - `AgentSchema`
@@ -1160,6 +1179,12 @@ Get Account Insights
 - `OrganizationAssetsResponse`
 - `OrganizationPersonasWithCategory`
 - `OrganizationPersonasWithCategoryResponse`
+- `OtfIntentShareData`
+- `OtfIntentSharesQuery`
+- `OtfIntentSharesResponse`
+- `OtfVolumeData`
+- `OtfVolumeRequest`
+- `OtfVolumeResponse`
 - `Pagination`
 - `PaginationInfo`
 - `PathFilter`
@@ -1298,6 +1323,7 @@ Get Account Insights
 - `VisibilityV2Info`
 - `VisibilityV2Query`
 - `VisibilityV2Response`
+- `VolumeResponseInfo`
 - `WebSearchResultsQuery`
 - `WebSearchResultsResponse`
 - `WebSearchResultsResult`

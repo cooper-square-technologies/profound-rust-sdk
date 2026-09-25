@@ -29,6 +29,7 @@ pub struct CategoryAssetWithCategory {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub alternate_domains: Option<Vec<String>>,
     pub is_owned: bool,
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub created_at: chrono::DateTime<chrono::FixedOffset>,
     pub logo_url: String,
     pub category: Category,
@@ -42,6 +43,7 @@ pub struct CategoryAssetWithCategory {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[non_exhaustive]
 pub struct DomainWithOrganization {
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub created_at: chrono::DateTime<chrono::FixedOffset>,
     pub id: String,
     pub name: String,

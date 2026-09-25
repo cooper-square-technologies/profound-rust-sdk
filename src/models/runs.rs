@@ -19,7 +19,11 @@ pub struct AcceptedAgentRun {
     /// Initial status of the accepted run.
     pub status: AgentRunStatus,
     /// When the run started, if execution began immediately.
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::datetime::option::deserialize"
+    )]
     pub started_at: Option<chrono::DateTime<chrono::FixedOffset>>,
 }
 
@@ -37,20 +41,44 @@ pub struct AgentRun {
     /// Current status of the run.
     pub status: AgentRunStatus,
     /// When the run started, if it has started.
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::datetime::option::deserialize"
+    )]
     pub started_at: Option<chrono::DateTime<chrono::FixedOffset>>,
     /// When the run finished, if it has completed.
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::datetime::option::deserialize"
+    )]
     pub finished_at: Option<chrono::DateTime<chrono::FixedOffset>>,
     /// Error details, when the run fails and error information is available.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub error: Option<serde_json::Value>,
-    /// Output values returned by the run, keyed by variable ID. This object conforms to `schema.output` from the agent detail response and is empty when no outputs are available.
+    /// Output values returned by the run, keyed by output-variable UUID. This UUID-keyed object is retained for compatibility and is empty when no outputs are available.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub outputs: Option<serde_json::Value>,
+    /// Expanded form of `outputs`, keyed by the same output-variable UUIDs. Each entry carries the agent's configured human-readable key as `title` alongside the returned value. `title` is null when the agent has no configured key for that output. Entries preserve the key order of `outputs`. The UUID-keyed `outputs` field remains the stable compatibility field.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub outputs_expanded: Option<std::collections::HashMap<String, AgentRunOutputDetail>>,
     /// Ordered step-by-step execution trace — one entry per node that ran, in execution order. Always present once the run has executed a node; per-node `outputs` inside each step are included only when the request asks for `verbose`.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub steps: Option<Vec<AgentRunStep>>,
+}
+
+///
+/// Response-only model, marked `#[non_exhaustive]`: fields may be added
+/// additively in future versions without a breaking release.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[non_exhaustive]
+pub struct AgentRunOutputDetail {
+    /// The agent's configured, human-readable key for this output. null when the agent has no configured key for this output.
+    #[serde(default)]
+    pub title: Option<String>,
+    /// Value returned for the output variable.
+    pub value: serde_json::Value,
 }
 
 /// Current execution status for an agent run.
@@ -137,10 +165,18 @@ pub struct AgentRunStep {
     /// Terminal status of this node execution.
     pub status: String,
     /// Wall-clock seconds the node took, if recorded.
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        serialize_with = "crate::number::option::serialize"
+    )]
     pub elapsed_time: Option<f64>,
     /// When the node finished, if it has.
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::datetime::option::deserialize"
+    )]
     pub finished_at: Option<chrono::DateTime<chrono::FixedOffset>>,
     /// Failure detail for this node, when it failed.
     #[serde(default, skip_serializing_if = "Option::is_none")]

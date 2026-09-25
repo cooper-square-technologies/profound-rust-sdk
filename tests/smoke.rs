@@ -248,7 +248,7 @@ async fn smoke() {
                 .limit(10000)
                 .cursor("example")
                 .order_by(PromptOrderBy::CreatedAt)
-                .order_dir(OrderByDirection::Asc)
+                .order_dir(OrderByDirection::Desc)
                 .analysis_type(vec![AnalysisType::Visibility])
                 .prompt_type(vec![PromptType::Visibility])
                 .status(vec!["active".to_string()])
@@ -657,8 +657,8 @@ async fn smoke() {
                     end_date: "".to_string(),
                     include: Some(vec![AnswersV2QueryInclude::RunId]),
                     filter: None,
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -715,8 +715,8 @@ async fn smoke() {
                     end_date: "".to_string(),
                     include: Some(vec![AnswersV2QueryInclude::RunId]),
                     filter: None,
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -1393,8 +1393,8 @@ async fn smoke() {
                     interval: Some(CitationsV2QueryInterval::Day),
                     scope: Some(CitationsV2QueryScope::All),
                     filter: None,
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -1464,8 +1464,8 @@ async fn smoke() {
                     assets: None,
                     filter: None,
                     sort: Some(AppRoutesV2AnswerEngineInsightsReportsVisibilitySortSpec { field: None }),
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -1497,6 +1497,7 @@ async fn smoke() {
                     end_date: "".to_string(),
                     comparison_start_date: None,
                     comparison_end_date: None,
+                    source: None,
                     group_by: None,
                     metrics: None,
                     interval: None,
@@ -1536,14 +1537,15 @@ async fn smoke() {
                     end_date: "".to_string(),
                     comparison_start_date: Some("".to_string()),
                     comparison_end_date: Some("".to_string()),
+                    source: Some(SentimentV2QuerySource::Response),
                     group_by: Some(vec![SentimentV2QueryGroupBy::Date]),
                     metrics: Some(vec![SentimentV2QueryMetric::PositiveSentiment]),
                     interval: Some(SentimentV2QueryInterval::Day),
                     filter: None,
                     sort: Some(AppRoutesV2AnswerEngineInsightsReportsSentimentSortSpec { field: None, dir: None }),
                     include_cited_websites: Some(false),
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -1612,8 +1614,8 @@ async fn smoke() {
                         field: "".to_string(),
                         dir: None,
                     }),
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -1741,8 +1743,8 @@ async fn smoke() {
                     assets: None,
                     filter: None,
                     sort: Some(AppRoutesV2AnswerEngineInsightsReportsVisibilitySortSpec { field: None }),
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -1799,8 +1801,8 @@ async fn smoke() {
                     interval: Some(CitationsV2QueryInterval::Day),
                     scope: Some(CitationsV2QueryScope::All),
                     filter: None,
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -1825,6 +1827,7 @@ async fn smoke() {
                     end_date: "".to_string(),
                     comparison_start_date: None,
                     comparison_end_date: None,
+                    source: None,
                     group_by: None,
                     metrics: None,
                     interval: None,
@@ -1857,14 +1860,15 @@ async fn smoke() {
                     end_date: "".to_string(),
                     comparison_start_date: Some("".to_string()),
                     comparison_end_date: Some("".to_string()),
+                    source: Some(SentimentV2QuerySource::Response),
                     group_by: Some(vec![SentimentV2QueryGroupBy::Date]),
                     metrics: Some(vec![SentimentV2QueryMetric::PositiveSentiment]),
                     interval: Some(SentimentV2QueryInterval::Day),
                     filter: None,
                     sort: Some(AppRoutesV2AnswerEngineInsightsReportsSentimentSortSpec { field: None, dir: None }),
                     include_cited_websites: Some(false),
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -1925,8 +1929,8 @@ async fn smoke() {
                         field: "".to_string(),
                         dir: None,
                     }),
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -2122,8 +2126,8 @@ async fn smoke() {
                     scope: Some(ShoppingBrandsV2QueryScope::Owned),
                     assets: None,
                     filter: None,
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -2190,8 +2194,8 @@ async fn smoke() {
                     scope: Some(ShoppingBrandsV2QueryScope::Owned),
                     assets: None,
                     filter: None,
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -2261,8 +2265,8 @@ async fn smoke() {
                     target_product: Some("x".to_string()),
                     competitor_limit: Some(5),
                     filter: None,
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -2334,8 +2338,8 @@ async fn smoke() {
                     target_product: Some("x".to_string()),
                     competitor_limit: Some(5),
                     filter: None,
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -2399,8 +2403,8 @@ async fn smoke() {
                     metrics: Some(vec![ShoppingMerchantsV2QueryMetric::MerchantShare]),
                     interval: Some(ShoppingMerchantsV2QueryInterval::Day),
                     filter: None,
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -2466,8 +2470,8 @@ async fn smoke() {
                     metrics: Some(vec![ShoppingMerchantsV2QueryMetric::MerchantShare]),
                     interval: Some(ShoppingMerchantsV2QueryInterval::Day),
                     filter: None,
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -2531,8 +2535,8 @@ async fn smoke() {
                     metrics: Some(vec![ShoppingTriggerRateV2QueryMetric::TotalRuns]),
                     interval: Some(ShoppingTriggerRateV2QueryInterval::Day),
                     filter: None,
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -2598,8 +2602,8 @@ async fn smoke() {
                     metrics: Some(vec![ShoppingTriggerRateV2QueryMetric::TotalRuns]),
                     interval: Some(ShoppingTriggerRateV2QueryInterval::Day),
                     filter: None,
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -2630,6 +2634,7 @@ async fn smoke() {
                     comparison_start_date: None,
                     comparison_end_date: None,
                     category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+                    languages: None,
                     topic_ids: None,
                     exclude_topic_ids: None,
                     tag_ids: None,
@@ -2669,6 +2674,7 @@ async fn smoke() {
                     comparison_start_date: Some("".to_string()),
                     comparison_end_date: Some("".to_string()),
                     category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+                    languages: Some(vec!["".to_string()]),
                     topic_ids: Some(vec!["7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string()]),
                     exclude_topic_ids: Some(false),
                     tag_ids: Some(vec!["7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string()]),
@@ -2708,6 +2714,7 @@ async fn smoke() {
                     comparison_start_date: None,
                     comparison_end_date: None,
                     category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+                    languages: None,
                     topic_ids: None,
                     exclude_topic_ids: None,
                     tag_ids: None,
@@ -2754,6 +2761,7 @@ async fn smoke() {
                     comparison_start_date: Some("".to_string()),
                     comparison_end_date: Some("".to_string()),
                     category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+                    languages: Some(vec!["".to_string()]),
                     topic_ids: Some(vec!["7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string()]),
                     exclude_topic_ids: Some(false),
                     tag_ids: Some(vec!["7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string()]),
@@ -2848,6 +2856,7 @@ async fn smoke() {
                     comparison_start_date: None,
                     comparison_end_date: None,
                     category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+                    languages: None,
                     topic_ids: None,
                     exclude_topic_ids: None,
                     tag_ids: None,
@@ -2890,6 +2899,7 @@ async fn smoke() {
                     comparison_start_date: Some("".to_string()),
                     comparison_end_date: Some("".to_string()),
                     category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+                    languages: Some(vec!["".to_string()]),
                     topic_ids: Some(vec!["7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string()]),
                     exclude_topic_ids: Some(false),
                     tag_ids: Some(vec!["7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string()]),
@@ -2932,6 +2942,7 @@ async fn smoke() {
                     comparison_start_date: None,
                     comparison_end_date: None,
                     category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+                    languages: None,
                     topic_ids: None,
                     exclude_topic_ids: None,
                     tag_ids: None,
@@ -2974,6 +2985,7 @@ async fn smoke() {
                     comparison_start_date: Some("".to_string()),
                     comparison_end_date: Some("".to_string()),
                     category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+                    languages: Some(vec!["".to_string()]),
                     topic_ids: Some(vec!["7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string()]),
                     exclude_topic_ids: Some(false),
                     tag_ids: Some(vec!["7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string()]),
@@ -3016,6 +3028,7 @@ async fn smoke() {
                     comparison_start_date: None,
                     comparison_end_date: None,
                     category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+                    languages: None,
                     topic_ids: None,
                     exclude_topic_ids: None,
                     tag_ids: None,
@@ -3054,6 +3067,7 @@ async fn smoke() {
                     comparison_start_date: Some("".to_string()),
                     comparison_end_date: Some("".to_string()),
                     category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+                    languages: Some(vec!["".to_string()]),
                     topic_ids: Some(vec!["7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string()]),
                     exclude_topic_ids: Some(false),
                     tag_ids: Some(vec!["7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string()]),
@@ -3092,6 +3106,7 @@ async fn smoke() {
                     comparison_start_date: None,
                     comparison_end_date: None,
                     category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+                    languages: None,
                     topic_ids: None,
                     exclude_topic_ids: None,
                     tag_ids: None,
@@ -3130,6 +3145,7 @@ async fn smoke() {
                     comparison_start_date: Some("".to_string()),
                     comparison_end_date: Some("".to_string()),
                     category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+                    languages: Some(vec!["".to_string()]),
                     topic_ids: Some(vec!["7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string()]),
                     exclude_topic_ids: Some(false),
                     tag_ids: Some(vec!["7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string()]),
@@ -3168,6 +3184,7 @@ async fn smoke() {
                     comparison_start_date: None,
                     comparison_end_date: None,
                     category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+                    languages: None,
                     topic_ids: None,
                     exclude_topic_ids: None,
                     tag_ids: None,
@@ -3206,6 +3223,7 @@ async fn smoke() {
                     comparison_start_date: Some("".to_string()),
                     comparison_end_date: Some("".to_string()),
                     category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+                    languages: Some(vec!["".to_string()]),
                     topic_ids: Some(vec!["7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string()]),
                     exclude_topic_ids: Some(false),
                     tag_ids: Some(vec!["7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string()]),
@@ -3244,6 +3262,7 @@ async fn smoke() {
                     comparison_start_date: None,
                     comparison_end_date: None,
                     category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+                    languages: None,
                     topic_ids: None,
                     exclude_topic_ids: None,
                     tag_ids: None,
@@ -3286,6 +3305,7 @@ async fn smoke() {
                     comparison_start_date: Some("".to_string()),
                     comparison_end_date: Some("".to_string()),
                     category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+                    languages: Some(vec!["".to_string()]),
                     topic_ids: Some(vec!["7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string()]),
                     exclude_topic_ids: Some(false),
                     tag_ids: Some(vec!["7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string()]),
@@ -3328,6 +3348,7 @@ async fn smoke() {
                     comparison_start_date: None,
                     comparison_end_date: None,
                     category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+                    languages: None,
                     topic_ids: None,
                     exclude_topic_ids: None,
                     tag_ids: None,
@@ -3368,6 +3389,7 @@ async fn smoke() {
                     comparison_start_date: Some("".to_string()),
                     comparison_end_date: Some("".to_string()),
                     category_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string(),
+                    languages: Some(vec!["".to_string()]),
                     topic_ids: Some(vec!["7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string()]),
                     exclude_topic_ids: Some(false),
                     tag_ids: Some(vec!["7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string()]),
@@ -3479,8 +3501,8 @@ async fn smoke() {
                     end_date: "".to_string(),
                     group_by: Some(vec![FactcheckScoresQueryGroupBy::Date]),
                     filter: None,
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -3539,8 +3561,8 @@ async fn smoke() {
                     end_date: "".to_string(),
                     group_by: Some(vec![FactcheckScoresQueryGroupBy::Date]),
                     filter: None,
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -3601,8 +3623,8 @@ async fn smoke() {
                     group_by: Some(vec![FactcheckClaimsQueryGroupBy::Model]),
                     filter: None,
                     include: Some(vec![FactcheckClaimsQueryInclude::Theme]),
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -3665,8 +3687,8 @@ async fn smoke() {
                     group_by: Some(vec![FactcheckClaimsQueryGroupBy::Model]),
                     filter: None,
                     include: Some(vec![FactcheckClaimsQueryInclude::Theme]),
-                    limit: Some(0),
-                    max_results: Some(0),
+                    limit: Some(1),
+                    max_results: Some(1),
                     cursor: Some("".to_string()),
                 })
                 .send()
@@ -3728,7 +3750,7 @@ async fn smoke() {
                     start_date: "".to_string(),
                     end_date: "".to_string(),
                     filter: None,
-                    limit: Some(0),
+                    limit: Some(1),
                     cursor: Some("".to_string()),
                     source_types: Some(vec![YoutubeChannelsQuerySourceType::Video]),
                     group_by: Some(vec![YoutubeChannelsQueryGroupBy::Channel]),
@@ -3789,7 +3811,7 @@ async fn smoke() {
                     start_date: "".to_string(),
                     end_date: "".to_string(),
                     filter: None,
-                    limit: Some(0),
+                    limit: Some(1),
                     cursor: Some("".to_string()),
                     source_types: Some(vec![YoutubeVideosQuerySourceType::Video]),
                     attribution: Some(YoutubeVideosQueryAttribution::Attributed),
@@ -4200,7 +4222,7 @@ async fn smoke() {
                     "7c9e6679-7425-40de-944b-e07fc1f90ae7",
                     SearchKnowledgeBaseRequest {
                         query: "x".to_string(),
-                        top_k: 0,
+                        top_k: 1,
                         return_full_page: None,
                         filters: None,
                     },
@@ -4227,7 +4249,7 @@ async fn smoke() {
                     "7c9e6679-7425-40de-944b-e07fc1f90ae7",
                     SearchKnowledgeBaseRequest {
                         query: "x".to_string(),
-                        top_k: 0,
+                        top_k: 1,
                         return_full_page: Some(false),
                         filters: Some(SearchKnowledgeBaseFilters {
                             tags: None,
@@ -4580,7 +4602,7 @@ async fn smoke() {
                         id: "x".to_string(),
                         name: "x".to_string(),
                         mime_type: "x".to_string(),
-                        size_bytes: 0,
+                        size_bytes: 1,
                         data_base64: "x".to_string(),
                     }]),
                     generation_context: Some(ProjectGenerationContext {
@@ -4822,7 +4844,7 @@ async fn smoke() {
                         brief: Some("x".to_string()),
                         r#type: Some("x".to_string()),
                         topic: Some("x".to_string()),
-                        impact: Some(0),
+                        impact: Some(1),
                         reference_url: Some("x".to_string()),
                         reference_label: Some("x".to_string()),
                         position: Some(0),
@@ -4912,7 +4934,7 @@ async fn smoke() {
                         brief: Some("x".to_string()),
                         r#type: Some("x".to_string()),
                         topic: Some("x".to_string()),
-                        impact: Some(0),
+                        impact: Some(1),
                         reference_url: Some("x".to_string()),
                         reference_label: Some("x".to_string()),
                     },
@@ -5308,6 +5330,116 @@ async fn smoke() {
                 failures.push(format!(
                     "{}: {error}",
                     "GET /v1/ads/openai-ads/ad-account/insights [all params]"
+                ));
+            }
+        }
+    }
+    {
+        let result: Result<(), Error> = async {
+            let _ = client
+                .prompt_volumes()
+                .volume()
+                .on_the_fly(OtfVolumeRequest {
+                    keyword: "".to_string(),
+                    matching_type: OtfVolumeRequestMatchingType::ExactMatch,
+                    start_date: chrono::Utc::now().date_naive(),
+                    end_date: chrono::Utc::now().date_naive(),
+                    regions: None,
+                    platforms: None,
+                    organization_id: None,
+                })
+                .send()
+                .await?;
+            Ok(())
+        }
+        .await;
+        if let Err(error) = result {
+            if is_smoke_failure(&error) {
+                failures.push(format!(
+                    "{}: {error}",
+                    "POST /v2/prompt-volumes/volume/on-the-fly [required params]"
+                ));
+            }
+        }
+    }
+    {
+        let result: Result<(), Error> = async {
+            let _ = client
+                .prompt_volumes()
+                .volume()
+                .on_the_fly(OtfVolumeRequest {
+                    keyword: "".to_string(),
+                    matching_type: OtfVolumeRequestMatchingType::ExactMatch,
+                    start_date: chrono::Utc::now().date_naive(),
+                    end_date: chrono::Utc::now().date_naive(),
+                    regions: Some(vec!["".to_string()]),
+                    platforms: Some(vec![OtfVolumeRequestPlatform::ChatgptCom]),
+                    organization_id: Some("7c9e6679-7425-40de-944b-e07fc1f90ae7".to_string()),
+                })
+                .send()
+                .await?;
+            Ok(())
+        }
+        .await;
+        if let Err(error) = result {
+            if is_smoke_failure(&error) {
+                failures.push(format!(
+                    "{}: {error}",
+                    "POST /v2/prompt-volumes/volume/on-the-fly [all params]"
+                ));
+            }
+        }
+    }
+    {
+        let result: Result<(), Error> = async {
+            let _ = client
+                .prompt_volumes()
+                .intents()
+                .on_the_fly(OtfIntentSharesQuery {
+                    keyword: "".to_string(),
+                    matching_type: OtfIntentSharesQueryMatchingType::ExactMatch,
+                    start_date: chrono::Utc::now().date_naive(),
+                    end_date: chrono::Utc::now().date_naive(),
+                    regions: None,
+                    platforms: None,
+                })
+                .send()
+                .await?;
+            Ok(())
+        }
+        .await;
+        if let Err(error) = result {
+            if is_smoke_failure(&error) {
+                failures.push(format!(
+                    "{}: {error}",
+                    "POST /v2/prompt-volumes/intents/on-the-fly [required params]"
+                ));
+            }
+        }
+    }
+    {
+        let result: Result<(), Error> = async {
+            let _ = client
+                .prompt_volumes()
+                .intents()
+                .on_the_fly(OtfIntentSharesQuery {
+                    keyword: "".to_string(),
+                    matching_type: OtfIntentSharesQueryMatchingType::ExactMatch,
+                    start_date: chrono::Utc::now().date_naive(),
+                    end_date: chrono::Utc::now().date_naive(),
+                    regions: Some(vec!["".to_string()]),
+                    platforms: Some(vec![OtfIntentSharesQueryPlatform::ChatgptCom]),
+                })
+                .send()
+                .await?;
+            Ok(())
+        }
+        .await;
+        if let Err(error) = result {
+            if is_smoke_failure(&error) {
+                failures.push(format!(
+                    "{}: {error}",
+                    "POST /v2/prompt-volumes/intents/on-the-fly [all params]"
                 ));
             }
         }

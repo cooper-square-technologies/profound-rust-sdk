@@ -84,11 +84,19 @@ pub struct ProjectTask {
     pub reference_label: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<ProjectTaskStatus>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::datetime::option::deserialize"
+    )]
     pub status_changed_at: Option<chrono::DateTime<chrono::FixedOffset>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub is_new: Option<bool>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::datetime::option::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::FixedOffset>>,
 }
 
@@ -118,11 +126,19 @@ pub struct ProjectTaskDetail {
     pub reference_label: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<ProjectTaskDetailStatus>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::datetime::option::deserialize"
+    )]
     pub status_changed_at: Option<chrono::DateTime<chrono::FixedOffset>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub is_new: Option<bool>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::datetime::option::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::FixedOffset>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub project_title: Option<String>,
@@ -155,6 +171,7 @@ pub struct ProjectTaskStatusPayload {
     pub task_id: String,
     pub project_id: String,
     pub status: ProjectTaskStatusPayloadStatus,
+    #[serde(deserialize_with = "crate::datetime::deserialize")]
     pub changed_at: chrono::DateTime<chrono::FixedOffset>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub changed_by: Option<String>,
