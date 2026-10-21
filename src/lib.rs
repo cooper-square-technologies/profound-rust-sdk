@@ -6,6 +6,7 @@ pub mod client;
 #[doc(hidden)]
 pub mod datetime;
 pub mod error;
+pub mod filter;
 #[doc(hidden)]
 pub mod http;
 pub mod models;

@@ -1,0 +1,41 @@
+name: Sync filter table
+
+on:
+  push:
+    branches: [scalar-next]
+    # The Scalar platform touches this manifest on every regeneration.
+    paths: [scalar-sdk.manifest.json]
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-filter-table
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          ref: scalar-next
+      - uses: dtolnay/rust-toolchain@29eef336d9b2848a0b548edc03f92a220660cdb8 # stable
+        with:
+          toolchain: stable
+          components: rustfmt
+      - run: python scripts/generate_filter_table.py
+      - name: Commit changed filter table
+        run: |
+          if git diff --quiet -- src/filter/table.rs; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/filter/table.rs
+          git commit -m "fix(filter): sync filter table with the published API spec"
+          # Plain push: a lost race against a regeneration push fails loudly, and the next run re-converges.
+          git push origin HEAD:scalar-next
